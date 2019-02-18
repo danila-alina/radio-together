@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   entry: './src/index.jsx',
   output: {
@@ -8,6 +10,9 @@ module.exports = {
   devServer: {
     contentBase: './dist',
   },
+
+  context: path.resolve(__dirname, './'),
+
   module: {
     rules: [
       {
@@ -22,6 +27,7 @@ module.exports = {
     ],
   },
   resolve: {
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     extensions: ['.pcss', '.css', '.js', '.jsx'],
   },
 };
