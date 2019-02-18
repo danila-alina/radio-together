@@ -16,8 +16,8 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.pcss$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+        test: /\.(css|pcss)$/,
+        loaders: ['style-loader', 'css-loader'],
       },
     ],
   },
