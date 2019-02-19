@@ -13,7 +13,7 @@ export const Title = styled.div`
   display: flex;
   align-items: center;
   color: ${styles.fontColor};
-  font-weight: ${styles.fontLight};
+  font-weight: ${styles.fontExtraLight};
   font-size: 24px;
   padding-left: 30px;
 `;
@@ -27,7 +27,7 @@ export const MenuItem = styled.div`
   }};
   background-color: ${props => props.selected && styles.backgroundSelectedColor};
   border-left: ${props => props.selected && `3px solid ${styles.selectedColor}`};
-  font-weight: ${props => props.selected && styles.fontBold};
+  font-weight: ${props => props.selected && styles.fontMedium};
 
   :hover {
     background-color: ${styles.backgroundSelectedColor};

@@ -7,6 +7,9 @@ export const selectedColor = '#A67BC1';
 export const fontColor = '#474747';
 export const fontSecondaryColor = '#B8B8B8';
 
+export const fontThin = 100;
+export const fontExtraLight = 200;
 export const fontLight = 300;
-export const fronNormal = 400;
-export const fontBold = 500;
+export const fronRegualr = 400;
+export const fontMedium = 500;
+export const fontBold = 600;
