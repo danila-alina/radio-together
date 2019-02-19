@@ -2,11 +2,14 @@ import styled from 'styled-components';
 import * as styles from 'constants/styles';
 
 export const StyledHeader = styled.div`
+  width: 100%;
+  height: 80px;
+  padding: 0 30px;
   background-color: ${styles.backgroundColor};
-  padding: 20px;
   
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const Search = styled.input`

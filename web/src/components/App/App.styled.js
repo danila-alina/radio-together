@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
 export const Layout = styled.div`
-  margin: 0px;
+  display: flex;
+  height: 100%;
+`;
+
+export const Main = styled.div`
+  width: 100%;
 `;

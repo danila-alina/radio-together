@@ -1,13 +1,17 @@
 import React from 'react';
 
 import Header from 'components/Header';
-import { Layout } from './App.styled';
+import SideMenu from 'components/SideMenu';
+import { Layout, Main } from './App.styled';
 
 class App extends React.Component {
   render() {
     return (
       <Layout>
-        <Header />
+        <SideMenu />
+        <Main>
+          <Header />
+        </Main>
       </Layout>
     );
   }
