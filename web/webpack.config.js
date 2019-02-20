@@ -9,6 +9,7 @@ module.exports = {
   },
   devServer: {
     contentBase: './dist',
+    historyApiFallback: true,
   },
 
   context: path.resolve(__dirname, './'),

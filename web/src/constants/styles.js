@@ -1,6 +1,7 @@
 export const backgroundColor = '#FBFBFB';
 export const backgroundGrayColor = '#EEEFF3';
 export const backgroundSelectedColor = '#E3E7F5';
+export const whiteColor = '#FFF';
 
 export const selectedColor = '#A67BC1';
 
