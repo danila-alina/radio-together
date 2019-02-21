@@ -16,7 +16,24 @@ class HomePage extends React.Component {
           </SectionTitle>
           <RadiostationsContainer>
             <RadiostationCard
-              colors={{ top: 'A67BC1', bottom: '#EAA8DF' }}
+              colors={{ top: '#A67BC1', bottom: '#EAA8DF' }}
+              userName="Dan Krachkouski"
+              radiostationName="Kotik"
+            />
+            <RadiostationCard
+              colors={{ top: '#8CA6DB', bottom: '#B993D6' }}
+              userName="Polina Rudenko"
+              radiostationName="Polana"
+            />
+            <RadiostationCard
+              colors={{ top: '#FAACA8', bottom: '#DDD6F3' }}
+              userName="John Riddle"
+              radiostationName="Accent"
+            />
+            <RadiostationCard
+              colors={{ top: '#EF629F', bottom: '#EECDA3' }}
+              userName="Allen Parks"
+              radiostationName="Sunrise"
             />
           </RadiostationsContainer>
         </Section>
