@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as styles from 'constants/styles';
+import { NavLink } from 'react-router-dom';
 
 export const StyledMenu = styled.div`
   width: 300px;
@@ -20,16 +21,19 @@ export const Title = styled.div`
 export const MenuList = styled.div`
 `;
 
-export const MenuItem = styled.div`
-  padding: ${(props) => {
-    return props.selected ? '15px 0px 15px 27px' : '15px 0px 15px 30px';
-  }};
-  background-color: ${props => props.selected && styles.backgroundSelectedColor};
-  border-left: ${props => props.selected && `3px solid ${styles.selectedColor}`};
-  font-weight: ${props => props.selected && styles.fontMedium};
+export const MenuItem = styled(NavLink)`
+  padding: 15px 0px 15px 30px;
+  text-decoration: none;
 
   :hover {
     background-color: ${styles.backgroundSelectedColor};
     cursor: pointer;
+  }
+  
+  &.${'selectedItem'} {
+    background-color: ${styles.backgroundSelectedColor};
+    border-left: 3px solid ${styles.selectedColor};
+    font-weight: ${styles.fontMedium};
+    padding: 15px 0px 15px 27px;
   }
 `;

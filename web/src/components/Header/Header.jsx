@@ -1,7 +1,8 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import {
-  StyledHeader, Search,
+  StyledHeader, Search, StyledNavLink,
   AvatarContainer, UserName, Avatar,
 } from './Header.styled';
 
@@ -11,8 +12,12 @@ class Header extends React.Component {
       <StyledHeader>
         <Search placeholder="Search for music, people, radiostations" />
         <AvatarContainer>
-          <UserName>Alina Arlova</UserName>
-          <Avatar />
+          <StyledNavLink to="/my-account">
+            <UserName>Alina Arlova</UserName>
+          </StyledNavLink>
+          <NavLink to="/my-account">
+            <Avatar />
+          </NavLink>
         </AvatarContainer>
       </StyledHeader>
     );

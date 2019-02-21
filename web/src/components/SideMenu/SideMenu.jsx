@@ -11,9 +11,15 @@ class SideMenu extends React.Component {
       <StyledMenu>
         <Title>Radio Together</Title>
         <MenuList>
-          <MenuItem selected>Home</MenuItem>
-          <MenuItem>My Music</MenuItem>
-          <MenuItem>Recommendations</MenuItem>
+          <MenuItem to="/" activeClassName="selectedItem" exact>
+            Home
+          </MenuItem>
+          <MenuItem to="/my-music" activeClassName="selectedItem" exact>
+            My Music
+          </MenuItem>
+          <MenuItem to="/recommendations" activeClassName="selectedItem" exact>
+            Recommendations
+          </MenuItem>
         </MenuList>
       </StyledMenu>
     );

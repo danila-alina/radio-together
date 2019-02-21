@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as styles from 'constants/styles';
+import { NavLink } from 'react-router-dom';
 
 export const StyledHeader = styled.div`
   width: 100%;
@@ -31,6 +32,11 @@ export const AvatarContainer = styled.div`
 export const UserName = styled.div`
   color: ${styles.fontColor};
   margin-right: 10px;
+  
+  :hover {
+    cursor: pointer;
+    color: ${styles.fontSelectedColor};
+  }
 `;
 
 export const Avatar = styled.div`
@@ -38,4 +44,12 @@ export const Avatar = styled.div`
   height: 40px;
   border-radius: 50%;
   background: linear-gradient(#F1B9D2, #A67BC1);
+  
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
 `;
