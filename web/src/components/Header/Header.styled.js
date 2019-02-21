@@ -5,7 +5,6 @@ export const StyledHeader = styled.div`
   width: 100%;
   height: 80px;
   padding: 0 30px;
-  background-color: ${styles.backgroundColor};
   
   display: flex;
   justify-content: space-between;
@@ -14,7 +13,7 @@ export const StyledHeader = styled.div`
 
 export const Search = styled.input`
   height: 35px;
-  width: 325px;
+  width: 500px;
   padding: 0 20px;
   
   border: none;

@@ -43,45 +43,6 @@ export const Title = styled.div`
   font-size: 20px;
 `;
 
-export const CurrentTrackContainer = styled.div`
-  margin-top: 30px;
-  display: flex;
-`;
-
-export const Cover = styled.img`
-  width: 150px;
-  height: 150px;
-  border-radius: 10px;
-`;
-
-export const TrackInfo = styled.div`
-  margin-left: 25px;
-`;
-
-export const TrackName = styled.div`
-  font-size: 18px;
-  font-weight: ${styles.fontMedium};
-`;
-
-export const ArtistName = styled.div`
-  font-size: 18px;
-  margin-top: 10px;
-`;
-
 export const TracksList = styled.div`
-`;
-
-export const TrackProgressContainer = styled.div`
-`;
-
-export const PlayButton = styled.div`
-`;
-
-export const Time = styled.div`
-`;
-
-export const Progress = styled.div`
-`;
-
-export const ShuffleButton = styled.div`
+  margin-top: 20px;
 `;

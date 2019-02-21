@@ -3,7 +3,6 @@ import * as styles from 'constants/styles';
 
 export const StyledMenu = styled.div`
   width: 300px;
-  height: 100%;
 
   background-color: ${styles.backgroundGrayColor};
 `;

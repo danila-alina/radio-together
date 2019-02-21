@@ -2,13 +2,12 @@ import React from 'react';
 
 import Track from './components/Track';
 import UserAvatar from './components/UserAvatar';
+import CurrentTrack from './components/CurrentTrack';
 
 import {
   StyledPage, AccountInfoSection, UserInfo, UserName,
   UserPreferences, UserFollowers, UserFollowing, TextBold,
-  RadiostationSection, Title, CurrentTrackContainer, Cover,
-  TrackInfo, TrackName, ArtistName, TracksList, TrackProgressContainer,
-  PlayButton, Time, Progress, ShuffleButton,
+  RadiostationSection, Title, TracksList,
 } from './MyAccountPage.styled';
 
 class MyAccountPage extends React.Component {
@@ -34,20 +33,11 @@ class MyAccountPage extends React.Component {
 
         <RadiostationSection>
           <Title>Radiostation</Title>
-          <CurrentTrackContainer>
-            <Cover src="https://i1.sndcdn.com/artworks-000162127557-hsogs1-t500x500.jpg" />
-            <TrackInfo>
-              <TrackName>Look Around</TrackName>
-              <ArtistName>Native Spirit</ArtistName>
-            </TrackInfo>
-            <TrackProgressContainer>
-              <PlayButton />
-              <Time>0:40</Time>
-              <Progress />
-              <Time>3:10</Time>
-              <ShuffleButton />
-            </TrackProgressContainer>
-          </CurrentTrackContainer>
+          <CurrentTrack
+            track="Look Around"
+            artist="Native Spirit"
+            cover="https://i1.sndcdn.com/artworks-000162127557-hsogs1-t500x500.jpg"
+          />
           <TracksList>
             <Track
               track="Discovery"
