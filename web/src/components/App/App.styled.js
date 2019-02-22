@@ -3,6 +3,7 @@ import * as styles from 'constants/styles';
 
 export const Layout = styled.div`
   display: flex;
+  min-height: 100vh;
 `;
 
 export const Main = styled.div`
