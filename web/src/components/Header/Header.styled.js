@@ -14,7 +14,7 @@ export const StyledHeader = styled.div`
 
 export const Search = styled.input`
   height: 35px;
-  width: 500px;
+  width: 400px;
   padding: 0 20px;
   
   border: none;
