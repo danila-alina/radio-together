@@ -8,7 +8,7 @@ export const selectedColor = '#A67BC1';
 
 export const fontColor = '#474747';
 export const fontSecondaryColor = '#B8B8B8';
-export const fontSelectedColor = '#000000';
+export const fontSelectedColor = '#212121';
 
 export const fontThin = 100;
 export const fontExtraLight = 200;

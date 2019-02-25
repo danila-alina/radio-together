@@ -2,6 +2,7 @@ import styled from 'styled-components';
 // import * as styles from 'constants/styles';
 
 export const Page = styled.div`
+  padding: 30px;
 `;
 
 export const SectionTitle = styled.div`

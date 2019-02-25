@@ -7,7 +7,7 @@ import CurrentTrack from './components/CurrentTrack';
 import {
   StyledPage, AccountInfoSection, UserInfo, UserName,
   UserPreferences, UserFollowers, UserFollowing, TextBold,
-  RadiostationSection, Title, TracksList,
+  RadiostationSection, Title, TracksList, RadiostationInfo,
 } from './MyAccountPage.styled';
 
 class MyAccountPage extends React.Component {
@@ -32,12 +32,14 @@ class MyAccountPage extends React.Component {
         </AccountInfoSection>
 
         <RadiostationSection>
-          <Title>Radiostation</Title>
-          <CurrentTrack
-            track="Look Around"
-            artist="Native Spirit"
-            cover="https://i1.sndcdn.com/artworks-000162127557-hsogs1-t500x500.jpg"
-          />
+          <RadiostationInfo>
+            <Title>Radiostation</Title>
+            <CurrentTrack
+              track="Look Around"
+              artist="Native Spirit"
+              cover="https://i1.sndcdn.com/artworks-000162127557-hsogs1-t500x500.jpg"
+            />
+          </RadiostationInfo>
           <TracksList>
             <Track
               track="Discovery"

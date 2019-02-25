@@ -25,12 +25,14 @@ class Playlist extends React.Component {
             </CoverContainer>
           )
           : (
-            <GeneratedCover
-              topColor={colors[number].topColor}
-              bottomColor={colors[number].bottomColor}
-            >
-              <PlaylistImage />
-            </GeneratedCover>
+            <CoverContainer>
+              <GeneratedCover
+                topColor={colors[number].topColor}
+                bottomColor={colors[number].bottomColor}
+              >
+                <PlaylistImage />
+              </GeneratedCover>
+            </CoverContainer>
           )
         }
         <PlaylistName>{playlist}</PlaylistName>

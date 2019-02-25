@@ -19,6 +19,7 @@ export const Title = styled.div`
 `;
 
 export const MenuList = styled.div`
+  margin-top: 15px;
 `;
 
 export const MenuItem = styled(NavLink)`
@@ -26,14 +27,14 @@ export const MenuItem = styled(NavLink)`
   text-decoration: none;
 
   :hover {
-    background-color: ${styles.backgroundSelectedColor};
     cursor: pointer;
+    color: ${styles.fontSelectedColor};
   }
   
   &.${'selectedItem'} {
     background-color: ${styles.backgroundSelectedColor};
     border-left: 3px solid ${styles.selectedColor};
-    font-weight: ${styles.fontMedium};
+    color: ${styles.fontSelectedColor};
     padding: 15px 0px 15px 27px;
   }
 `;

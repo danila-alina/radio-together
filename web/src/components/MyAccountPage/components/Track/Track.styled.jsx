@@ -3,7 +3,7 @@ import * as styles from 'constants/styles';
 
 export const TrackContainer = styled.div`
   width: 100%;
-  padding: 10px 0;
+  padding: 10px 30px;
   
   display: flex;
   align-items: center;

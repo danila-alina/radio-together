@@ -6,6 +6,7 @@ export const StyledPage = styled.div`
 
 export const AccountInfoSection = styled.div`
   display: flex;
+  padding: 30px 30px 0 30px;
 `;
 
 export const UserInfo = styled.div`
@@ -33,6 +34,10 @@ export const UserFollowing = styled.div`
 
 export const TextBold = styled.span`
   font-weight: ${styles.fontMedium};
+`;
+
+export const RadiostationInfo = styled.div`
+  padding: 0 30px;
 `;
 
 export const RadiostationSection = styled.div`

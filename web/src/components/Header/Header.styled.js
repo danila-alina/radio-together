@@ -14,7 +14,7 @@ export const StyledHeader = styled.div`
 
 export const Search = styled.input`
   height: 35px;
-  width: 400px;
+  width: 325px;
   padding: 0 20px;
   
   border: none;
@@ -22,6 +22,14 @@ export const Search = styled.input`
   
   background-color: ${styles.backgroundGrayColor};
   color: ${styles.fontSecondaryColor};
+  
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  transition: all .5s;
+  
+  :focus {
+    width: 450px;
+  }
 `;
 
 export const AvatarContainer = styled.div`

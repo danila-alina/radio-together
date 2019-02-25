@@ -3,6 +3,7 @@ import * as styles from 'constants/styles';
 import { Plus } from 'styled-icons/feather';
 
 export const Page = styled.div`
+  padding: 30px;
 `;
 
 export const Section = styled.div`
@@ -28,6 +29,12 @@ export const NewPlaylist = styled.div`
   align-items: center;
   background-color: ${styles.backgroundGrayColor};
   color: ${styles.fontSecondaryColor};
+  
+  :hover {
+    cursor: pointer;
+    color: #757575;
+    box-shadow: 0 0 20px 3px #d9d9db;
+  }
 `;
 
 export const NewPlaylistImage = styled(Plus)`

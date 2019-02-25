@@ -3,7 +3,7 @@ import React from 'react';
 import Routes from 'components/Routes';
 import Header from 'components/Header';
 import SideMenu from 'components/SideMenu';
-import { Layout, Main, Page } from './App.styled';
+import { Layout, Main } from './App.styled';
 
 class App extends React.Component {
   render() {
@@ -12,9 +12,7 @@ class App extends React.Component {
         <SideMenu />
         <Main>
           <Header />
-          <Page>
-            <Routes />
-          </Page>
+          <Routes />
         </Main>
       </Layout>
     );
