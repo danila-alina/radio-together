@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  PlaylistContiner, Cover, GeneratedCover,
-  PlaylistImage, PlaylistName,
+  PlaylistContiner, CoverContainer, Cover, CoverShadow,
+  GeneratedCover, PlaylistImage, PlaylistName,
 } from './Playlist.styled';
 
 class Playlist extends React.Component {
@@ -12,11 +12,18 @@ class Playlist extends React.Component {
     const colors = [
       { topColor: '#F1B9D2', bottomColor: '#BBCBED' },
       { topColor: '#ffc3718a', bottomColor: '#ff5f6da6' },
+      { topColor: '#DDD6F3', bottomColor: '#FAACA8' },
+      { topColor: '#ffafbd', bottomColor: '#c9ffbf' },
     ];
     return (
       <PlaylistContiner>
         {cover
-          ? <Cover src={cover} />
+          ? (
+            <CoverContainer>
+              <CoverShadow cover={cover} />
+              <Cover cover={cover} />
+            </CoverContainer>
+          )
           : (
             <GeneratedCover
               topColor={colors[number].topColor}

@@ -35,11 +35,11 @@ class MyMusicPage extends React.Component {
             />
             <Playlist
               playlist="New Playlist 3"
-              number={0}
+              number={2}
             />
             <Playlist
               playlist="New Playlist 4"
-              number={1}
+              number={3}
             />
             <NewPlaylist>
               <NewPlaylistImage />

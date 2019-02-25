@@ -10,37 +10,46 @@ export const PlaylistContiner = styled.div`
   margin-bottom: 30px;
 `;
 
-export const Cover = styled.img`
+export const CoverShadow = styled.div`
+  position:absolute;
+  background-size: 100% auto;
+  background-image: url(${props => props.cover});
+`;
+
+export const Cover = styled.div`
+  background-size: 100% auto;
+  background-image: url(${props => props.cover});
+  border-radius: 10px;
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height:100%;
+`;
+
+export const CoverContainer = styled.div`
   width: 130px;
   height: 130px;
   border-radius: 10px;
-  object-fit: cover;
-  
   position: relative;
-  z-index: 0;
   
   :hover {
     cursor: pointer;
-
-    ::after {
-     content: "";
-     z-index: -1;
-     position: absolute;
-     bottom: -5px;
-     left: 0;
-     height: 105%;
-     width: 100%;
-     opacity: 0.8;
-     border-radius: 10px;
-     
-     background: inherit;
-     
-     -webkit-filter: blur(8px);
-     -moz-filter: blur(8px);
-     -o-filter: blur(8px);
-     -ms-filter: blur(8px);
-     filter: blur(8px);
-    }    
+  }
+  
+  &:hover ${CoverShadow} {
+    bottom: -5px;
+    left: 0;
+    height: 105%;
+    width: 100%;
+    opacity: 0.8;
+    border-radius: 10px;
+      
+    -webkit-filter: blur(8px);
+    -moz-filter: blur(8px);
+    -o-filter: blur(8px);
+    -ms-filter: blur(8px);
+    filter: blur(8px);
   }
 `;
 
