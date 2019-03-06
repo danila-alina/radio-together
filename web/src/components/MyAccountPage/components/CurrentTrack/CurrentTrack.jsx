@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Sound from 'react-sound';
+
 import {
   CurrentTrackContainer, Cover,
-  TrackInfo, TrackName, ArtistName, TrackInfoContainer,
+  TrackInfo, TrackName, ArtistName, TrackInfoContainer, PauseButton, ProgressContainer,
   PlayButton, Time, Progress, ShuffleButton, TrackInfoName, TrackInfoProgress,
   TrackListenersContainer, ListenerAvatar, ListenerName, ListenersText, ListenersAmount,
 } from './CurrentTrack.styled';
@@ -11,6 +13,9 @@ import {
 class CurrentTrack extends React.Component {
   state ={
     shuffle: false,
+    progress: 0,
+    position: 0,
+    status: null,
   }
 
   onShuffleClick = () => {
@@ -21,11 +26,39 @@ class CurrentTrack extends React.Component {
     });
   }
 
+  onPlayClick = () => {
+    this.setState({
+      status: 'PLAYING',
+    });
+  }
+
+  onPauseClick = () => {
+    this.setState({
+      status: 'PAUSED',
+    });
+  }
+
+  onPlaying = ({ position, duration }) => {
+    const progress = position / duration * 100;
+    this.setState({
+      progress,
+      position,
+    });
+  }
+
   render() {
-    const { shuffle } = this.state;
+    const {
+      shuffle, status, position, progress,
+    } = this.state;
     const { track, artist, cover } = this.props;
     return (
       <CurrentTrackContainer>
+        <Sound
+          url="https://sgi2.beltelecom-by-minsk.vkuseraudio.net/p17/cc185b7a168944.mp3?extra=7D9NsbnKOhXOEFSwPknb--MqzNFtf-O6W7_zM59oKCj0jkAx9_bKXjd9_HW6d-JR40in27N89r3TErCiGS5pOb797OLQQ7OGY6uqM5UdEEmPMutLwGfLyPpFW2zkg-sNPvcpBSI_v39Gxj6ODg4GyyA"
+          playStatus={status}
+          position={position}
+          onPlaying={this.onPlaying}
+        />
         <Cover src={cover} />
         <TrackInfoContainer>
           <TrackInfo>
@@ -34,9 +67,29 @@ class CurrentTrack extends React.Component {
               <ArtistName>{artist}</ArtistName>
             </TrackInfoName>
             <TrackInfoProgress>
-              <PlayButton />
-              <Time>0:40</Time>
-              <Progress />
+              {status === 'PLAYING'
+                ? (
+                  <PauseButton
+                    onClick={this.onPauseClick}
+                  />
+                )
+                : (
+                  <PlayButton
+                    onClick={this.onPlayClick}
+                  />
+                )
+              }
+              <Time>
+                {Math.floor(position / 1000 / 60)}
+                :
+                {Math.floor(position / 1000)}
+              </Time>
+              <ProgressContainer>
+                <Progress
+                  progress={progress}
+                  color="#C688A8"
+                />
+              </ProgressContainer>
               <Time>3:10</Time>
               <ShuffleButton
                 onClick={this.onShuffleClick}

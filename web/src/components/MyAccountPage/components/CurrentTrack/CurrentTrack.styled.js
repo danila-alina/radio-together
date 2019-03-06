@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { ArrowShuffle } from 'styled-icons/typicons';
+import { Pause } from 'styled-icons/fa-solid/Pause';
+import { Play } from 'styled-icons/fa-solid/Play';
 import * as styles from 'constants/styles';
 
 export const CurrentTrackContainer = styled.div`
@@ -69,14 +71,19 @@ export const ListenersAmount = styled.div`
   font-weight: ${styles.fontMedium};
 `;
 
-export const PlayButton = styled.div`
-  width: 0;
-  height: 0;
-  
-  border-left: 20px solid ${styles.grayColor};
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  
+export const PlayButton = styled(Play)`
+  width: 20px;
+  color: ${styles.grayColor};
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const PauseButton = styled(Pause)`
+  width: 20px;
+  color: ${styles.grayColor};
+
   :hover {
     cursor: pointer;
   }
@@ -88,10 +95,25 @@ export const Time = styled.div`
 `;
 
 export const Progress = styled.div`
-  width: 400px;
-  height: 4px;
+  width: 100%;
+  height: 100%;
   border-radius: 2px;
   background-color: ${styles.grayColor};
+  
+  ::after {
+    content: "";
+    position: absolute;
+    width: ${props => props.progress}%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: ${props => props.color};
+  }
+`;
+
+export const ProgressContainer = styled.div`
+  width: 400px;
+  height: 4px;
+  position: relative;
 `;
 
 export const ShuffleButton = styled(ArrowShuffle)`
