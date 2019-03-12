@@ -3,12 +3,14 @@ const path = require('path');
 module.exports = {
   entry: './src/index.jsx',
   output: {
-    path: `${__dirname}/dist`,
+    path: `${__dirname}/src/static/`,
     publicPath: '/',
     filename: 'bundle.js',
   },
   devServer: {
-    contentBase: './dist',
+    host: '0.0.0.0',
+    port: 3000,
+    contentBase: './src/static',
     historyApiFallback: true,
   },
 
