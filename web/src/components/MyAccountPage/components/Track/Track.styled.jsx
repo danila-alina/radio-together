@@ -11,14 +11,18 @@ export const TrackContainer = styled.div`
   background-color: ${props => props.selected && styles.backgroundSelectedColor};
   
   :hover {
-    background-color: ${styles.backgroundSelectedColor};
+    background-color: ${(props) => {
+    return props.selected
+      ? styles.backgroundSelectedColor
+      : styles.backgroundLightSelectedColor;
+  }};
     cursor: pointer;
   }
 `;
 
 export const Cover = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 5px;
 `;
 

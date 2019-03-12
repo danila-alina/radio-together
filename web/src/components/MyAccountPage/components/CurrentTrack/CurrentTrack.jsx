@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import Sound from 'react-sound';
 
+import * as styles from 'constants/styles';
+
 import {
   CurrentTrackContainer, Cover,
   TrackInfo, TrackName, ArtistName, TrackInfoContainer, PauseButton, ProgressContainer,
@@ -50,11 +52,16 @@ class CurrentTrack extends React.Component {
     const {
       shuffle, status, position, progress,
     } = this.state;
-    const { track, artist, cover } = this.props;
+    const {
+      track, artist, cover, url, color,
+    } = this.props;
+    const trackMinutes = Math.floor(position / 1000 / 60);
+    const trackSeconds = Math.floor((position / 1000) % 60);
+
     return (
       <CurrentTrackContainer>
         <Sound
-          url="https://sgi2.beltelecom-by-minsk.vkuseraudio.net/p17/cc185b7a168944.mp3?extra=7D9NsbnKOhXOEFSwPknb--MqzNFtf-O6W7_zM59oKCj0jkAx9_bKXjd9_HW6d-JR40in27N89r3TErCiGS5pOb797OLQQ7OGY6uqM5UdEEmPMutLwGfLyPpFW2zkg-sNPvcpBSI_v39Gxj6ODg4GyyA"
+          url={url}
           playStatus={status}
           position={position}
           onPlaying={this.onPlaying}
@@ -80,21 +87,21 @@ class CurrentTrack extends React.Component {
                 )
               }
               <Time>
-                {Math.floor(position / 1000 / 60)}
+                {trackMinutes}
                 :
-                {Math.floor(position / 1000)}
+                {trackSeconds < 10 ? `0${trackSeconds}` : trackSeconds}
               </Time>
               <ProgressContainer>
                 <Progress
                   progress={progress}
-                  color="#C688A8"
+                  color={color}
                 />
               </ProgressContainer>
-              <Time>3:10</Time>
+              <Time>3:00</Time>
               <ShuffleButton
                 onClick={this.onShuffleClick}
                 enabled={shuffle}
-                color="#C688A8"
+                color={color}
               />
             </TrackInfoProgress>
           </TrackInfo>
@@ -124,10 +131,13 @@ CurrentTrack.propTypes = {
   track: PropTypes.string.isRequired,
   artist: PropTypes.string.isRequired,
   cover: PropTypes.string,
+  url: PropTypes.string.isRequired,
+  color: PropTypes.string,
 };
 
 CurrentTrack.defaultProps = {
   cover: '',
+  color: styles.selectedColor,
 };
 
 export default CurrentTrack;

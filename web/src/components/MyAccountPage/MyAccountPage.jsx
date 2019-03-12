@@ -1,72 +1,60 @@
 import React from 'react';
 
+import AccountInfo from './components/AccountInfo';
 import Track from './components/Track';
-import UserAvatar from './components/UserAvatar';
 import CurrentTrack from './components/CurrentTrack';
 
 import {
-  StyledPage, AccountInfoSection, UserInfo, UserName,
-  UserPreferences, UserFollowers, UserFollowing, TextBold,
-  RadiostationSection, Title, TracksList, RadiostationInfo,
+  StyledPage, RadiostationSection,
+  Title, TracksList, RadiostationInfo,
 } from './MyAccountPage.styled';
 
+import { tracks } from './tracks';
+
 class MyAccountPage extends React.Component {
+  state = {
+    currentTrack: 0,
+  };
+
+  onSelectTrack = (trackIndex) => {
+    this.setState({
+      currentTrack: trackIndex,
+    });
+  }
+
   render() {
+    const { currentTrack } = this.state;
+
     return (
       <StyledPage>
-        <AccountInfoSection>
-          <UserAvatar />
-          <UserInfo>
-            <UserName>Alina Arlova</UserName>
-            <UserPreferences>
-              <UserFollowers>
-                <TextBold>90&nbsp;</TextBold>
-                Followers
-              </UserFollowers>
-              <UserFollowing>
-                Following:&nbsp;
-                <TextBold>91</TextBold>
-              </UserFollowing>
-            </UserPreferences>
-          </UserInfo>
-        </AccountInfoSection>
+        <AccountInfo />
 
         <RadiostationSection>
           <RadiostationInfo>
             <Title>Radiostation</Title>
             <CurrentTrack
-              track="Look Around"
-              artist="Native Spirit"
-              cover="https://i1.sndcdn.com/artworks-000162127557-hsogs1-t500x500.jpg"
+              key={currentTrack}
+              track={tracks[currentTrack].track}
+              artist={tracks[currentTrack].artist}
+              cover={tracks[currentTrack].cover}
+              url={tracks[currentTrack].url}
+              color={tracks[currentTrack].color}
             />
           </RadiostationInfo>
+
           <TracksList>
-            <Track
-              track="Discovery"
-              artist="Kailee Morgue"
-              cover="https://cdn61.zvooq.com/pic?type=release&id=6269006&size=500x500&ext=jpg"
-            />
-            <Track
-              track="Look Around"
-              artist="Native Spirit"
-              cover="https://i1.sndcdn.com/artworks-000162127557-hsogs1-t500x500.jpg"
-              selected
-            />
-            <Track
-              track="Blame"
-              artist="Kyle"
-              cover="https://i1.sndcdn.com/artworks-000180119811-wgpequ-t500x500.jpg"
-            />
-            <Track
-              track="Breezeblocks"
-              artist="alt-J"
-              cover="https://www.startalkradio.net/wp-content/uploads/2015/05/alt-j-an-awesome-wave-600x600.jpg"
-            />
-            <Track
-              track="Touch"
-              artist="MAALA"
-              cover="https://images.genius.com/cc3f4f45641b5bab6ed527a82f119e21.1000x1000x1.jpg"
-            />
+            {tracks.map((track, index) => {
+              return (
+                <Track
+                  key={track.id}
+                  track={track.track}
+                  artist={track.artist}
+                  cover={track.cover}
+                  selected={currentTrack === index}
+                  onSelectTrack={() => this.onSelectTrack(index)}
+                />
+              );
+            })}
           </TracksList>
         </RadiostationSection>
       </StyledPage>

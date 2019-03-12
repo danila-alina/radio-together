@@ -90,8 +90,9 @@ export const PauseButton = styled(Pause)`
 `;
 
 export const Time = styled.div`
-  margin: 0 10px;
+  margin: 0 5px 0 10px;
   font-size: 14px;
+  width: 40px;
 `;
 
 export const Progress = styled.div`
