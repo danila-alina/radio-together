@@ -1,6 +1,7 @@
 {
   parser: "babel-eslint",
   "rules": {
+    "react/destructuring-assignment": [<enabled>, "never"],
     "no-console": 2,
     "no-underscore-dangle": 0,
     "arrow-body-style": 0,

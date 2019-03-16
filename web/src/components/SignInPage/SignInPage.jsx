@@ -1,4 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { signIn, setAuth } from 'resources/user/user.actions';
 
 import {
   Page, Main, Title, SignInButton,
@@ -6,7 +11,12 @@ import {
 
 class SignInPage extends React.Component {
   onSignInClick = () => {
-    localStorage.setItem('auth', true);
+    this.props.signIn()
+      .then((result) => {
+        localStorage.setItem('token', result.token); //eslint-disable-line
+        this.props.setAuth();
+        this.props.history.push('/');
+      });
   }
 
   render() {
@@ -23,4 +33,12 @@ class SignInPage extends React.Component {
   }
 }
 
-export default SignInPage;
+SignInPage.propTypes = {
+  signIn: PropTypes.func.isRequired,
+  setAuth: PropTypes.func.isRequired,
+};
+
+export default connect(state => ({}), {
+  signIn,
+  setAuth,
+})(withRouter(SignInPage));
