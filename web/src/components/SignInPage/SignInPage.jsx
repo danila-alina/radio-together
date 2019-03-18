@@ -13,7 +13,7 @@ class SignInPage extends React.Component {
   onSignInClick = () => {
     this.props.signIn()
       .then((result) => {
-        localStorage.setItem('token', result.token); //eslint-disable-line
+        window.localStorage.setItem('token', result.token);
         this.props.setAuth();
         this.props.history.push('/');
       });
@@ -36,9 +36,12 @@ class SignInPage extends React.Component {
 SignInPage.propTypes = {
   signIn: PropTypes.func.isRequired,
   setAuth: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
-export default connect(state => ({}), {
+export default withRouter(connect(state => ({}), {
   signIn,
   setAuth,
-})(withRouter(SignInPage));
+})(SignInPage));

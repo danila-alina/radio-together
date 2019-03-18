@@ -10,5 +10,8 @@
     "no-unused-vars": ["error", { "args": "none" }],
     "react/prefer-stateless-function": 0
   },
-  "extends": ["airbnb"]
+  "extends": ["airbnb"],
+  "env": {
+    "browser": true
+  }
 }

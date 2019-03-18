@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 import SignInPage from 'components/SignInPage';
 
@@ -8,6 +8,7 @@ class AuthRoutes extends React.Component {
     return (
       <Switch>
         <Route path="/auth" component={SignInPage} />
+        <Redirect to="/auth" />
       </Switch>
     );
   }
