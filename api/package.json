@@ -9,10 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "isomorphic-fetch": "2.2.1",
     "koa": "2.7.0",
     "koa-cors": "0.0.16",
     "koa-mount": "4.0.0",
-    "koa-router": "7.4.0"
+    "koa-router": "7.4.0",
+    "monk": "6.0.6"
   },
   "devDependencies": {
     "nodemon": "1.18.10"

@@ -8,6 +8,7 @@ services:
       - ./web/src:/app/src
     ports:
       - '3000:3000'
+
   api:
     build:
       context: ./api
@@ -15,3 +16,13 @@ services:
       - "./api/src:/app/src"
     ports:
       - "3001:3001"
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - db-data:/data/db
+      
+volumes:
+  db-data:
