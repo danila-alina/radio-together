@@ -34,7 +34,6 @@ export const Title = styled.h1`
 `;
 
 export const SignInButton = styled.div`
-  border: 1px solid ${styles.borderColor};
   border-radius: 5px;
   display: flex;
   align-items: center;

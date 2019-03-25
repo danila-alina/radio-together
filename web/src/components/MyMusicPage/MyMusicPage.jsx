@@ -1,4 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { getPlaylists, addPlaylist } from 'resources/playlist/playlist.actions';
+import * as playlistSelectors from 'resources/playlist/playlist.selectors';
 
 import Playlist from 'components/Playlist';
 import {
@@ -7,41 +12,34 @@ import {
 } from './MyMusicPage.styled';
 
 class MyMusicPage extends React.Component {
+  componentDidMount() {
+    this.props.getPlaylists();
+  }
+
+  onAddPlaylistClick = () => {
+    this.props.addPlaylist();
+  }
+
   render() {
+    const playlists = this.props.playlists || [];
+    console.log(playlists);
+    const renderPlaylists = playlists.map((playlist) => {
+      return (
+        <Playlist
+          key={playlist.id}
+          playlist={playlist.name}
+          cover={playlist.cover}
+        />
+      );
+    });
+
     return (
       <Page>
         <Section>
           <SectionTitle>Playlists</SectionTitle>
           <Playlists>
-            <Playlist
-              playlist="Music for travel"
-              cover="https://pp.userapi.com/c848616/v848616352/139883/WyWFdw5GTGY.jpg"
-            />
-            <Playlist
-              playlist="Inspiration"
-              cover="https://pp.userapi.com/c845017/v845017351/1aaded/t8S8AOntQHc.jpg"
-            />
-            <Playlist
-              playlist="Beauty"
-              cover="https://pp.userapi.com/c845218/v845218376/1b2654/_XLGKD58fws.jpg"
-            />
-            <Playlist
-              playlist="New Playlist 1"
-              number={0}
-            />
-            <Playlist
-              playlist="New Playlist 2"
-              number={1}
-            />
-            <Playlist
-              playlist="New Playlist 3"
-              number={2}
-            />
-            <Playlist
-              playlist="New Playlist 4"
-              number={3}
-            />
-            <NewPlaylist>
+            {renderPlaylists}
+            <NewPlaylist onClick={this.onAddPlaylistClick}>
               <NewPlaylistImage />
               Add Playlist
             </NewPlaylist>
@@ -52,4 +50,22 @@ class MyMusicPage extends React.Component {
   }
 }
 
-export default MyMusicPage;
+MyMusicPage.propTypes = {
+  playlists: PropTypes.arrayOf(PropTypes.object).isRequired,
+  getPlaylists: PropTypes.func.isRequired,
+  addPlaylist: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  playlists: playlistSelectors.getPlaylists(state),
+});
+
+const mapDispatchToProps = {
+  getPlaylists,
+  addPlaylist,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MyMusicPage);
