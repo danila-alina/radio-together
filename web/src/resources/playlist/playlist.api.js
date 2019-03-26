@@ -11,6 +11,11 @@ export function getPlaylists() {
     .get('playlist');
 }
 
+export function getPlaylistById(playlistId) {
+  return baseApi
+    .get(`playlist/${playlistId}`);
+}
+
 export function addPlaylist() {
   return baseApi
     .post('playlist/add');

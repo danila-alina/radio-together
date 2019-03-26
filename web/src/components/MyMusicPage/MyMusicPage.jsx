@@ -8,7 +8,7 @@ import * as playlistSelectors from 'resources/playlist/playlist.selectors';
 import Playlist from 'components/Playlist';
 import {
   Page, Section, SectionTitle, Playlists,
-  NewPlaylist, NewPlaylistImage,
+  NewPlaylist, NewPlaylistImage, StyledNavLink,
 } from './MyMusicPage.styled';
 
 class MyMusicPage extends React.Component {
@@ -22,14 +22,16 @@ class MyMusicPage extends React.Component {
 
   render() {
     const playlists = this.props.playlists || [];
-    console.log(playlists);
     const renderPlaylists = playlists.map((playlist) => {
+      const playlistLink = `/playlist/${playlist._id}`;
       return (
-        <Playlist
-          key={playlist.id}
-          playlist={playlist.name}
-          cover={playlist.cover}
-        />
+        <StyledNavLink key={playlist._id} to={playlistLink}>
+          <Playlist
+            id={playlist._id}
+            playlist={playlist.name}
+            cover={playlist.cover}
+          />
+        </StyledNavLink>
       );
     });
 

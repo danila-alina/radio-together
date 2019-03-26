@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as styles from 'constants/styles';
+import { NavLink } from 'react-router-dom';
 import { Plus } from 'styled-icons/feather';
 
 export const Page = styled.div`
@@ -11,6 +12,10 @@ export const Section = styled.div`
 
 export const SectionTitle = styled.div`
   font-size: 18px;
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
 `;
 
 export const Playlists = styled.div`
