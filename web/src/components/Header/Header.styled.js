@@ -14,11 +14,11 @@ export const StyledHeader = styled.div`
 
 export const Search = styled.input`
   height: 35px;
-  width: 325px;
+  width: 364px;
   padding: 0 20px;
   
   border: none;
-  border-radius: 15px;
+  border-radius: 10px;
   
   background-color: ${styles.backgroundGrayColor};
   color: ${styles.fontSecondaryColor};

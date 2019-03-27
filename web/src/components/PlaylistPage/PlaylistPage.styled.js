@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import * as styles from 'constants/styles';
 import { CompactDisc } from 'styled-icons/fa-solid';
+import { Edit } from 'styled-icons/fa-regular';
 
 export const Page = styled.div`
 `;
@@ -14,14 +15,19 @@ export const Playlist = styled.div`
   font-size: 14px;
   text-transform: uppercase;
   font-weight: ${styles.fontLight};
-  margin-top: 5px;
 `;
 
-export const ChangeCover = styled.div`
+export const FileInputContaier = styled.label`
   display: none;
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const FileInput = styled.input.attrs({
+  type: 'file',
+})`
+  display: none;
 `;
 
 export const PlaylistCover = styled.div`
@@ -29,7 +35,7 @@ export const PlaylistCover = styled.div`
   &:hover {
     filter: brightness(95%);
   }
-  &:hover ${ChangeCover} {
+  &:hover ${FileInputContaier} {
     display: block;
     position: absolute;
     bottom: 55px;
@@ -69,11 +75,57 @@ export const PlaylistImage = styled(CompactDisc)`
 
 export const PlaylistInfo = styled.div`
   margin-left: 20px;
+  width: 200px;
 `;
 
 export const PlaylistName = styled.div`
-  margin-top: 5px;
+  margin-top: 10px;
   font-size: 20px;
+`;
+
+export const PlaylistAdditional = styled.div`
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 20px;
+`;
+
+export const PlaylistNameInput = styled.input`
+  // border: 1px solid ${styles.grayColor};
+  border: 1px solid ${styles.backgroundGrayColor};
+  background-color: ${styles.backgroundGrayColor};
+  border-radius: 10px;
+  padding: 5px;
+  margin: 2px 0px 0px -6px;
+  color: ${styles.fontColor};
+  font-size: 20px;
+  font-family: 'Montserrat', sans-serif;
+  width: 100%;
+`;
+
+export const SaveButton = styled.div`
+  color: ${styles.fontSecondaryColor};
+  font-size: 14px;
+  font-weight: ${styles.fontLight};
+  text-transform: uppercase;
+  margin-right: 6px;
+  
+  :hover {
+    cursor: pointer;
+    color: ${styles.fontColor};
+  }
+`;
+
+export const EditButton = styled(Edit)`
+  width: 18px;
+  color: ${styles.iconColor};
+  margin-right: 6px;
+
+  :hover {
+    cursor: pointer;
+    color: ${styles.iconHoverColor};
+  }
 `;
 
 export const TrackListContainer = styled.div`

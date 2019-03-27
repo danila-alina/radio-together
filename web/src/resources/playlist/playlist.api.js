@@ -20,3 +20,16 @@ export function addPlaylist() {
   return baseApi
     .post('playlist/add');
 }
+
+export function uploadPlaylistCover(imageData) {
+  return baseApi
+    .postFile('playlist/cover', imageData);
+}
+
+export function updatePlaylistCover(playlistId, cover) {
+  return baseApi
+    .put('playlist/cover', null, {
+      playlistId,
+      cover,
+    });
+}

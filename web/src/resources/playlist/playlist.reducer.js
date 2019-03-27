@@ -20,6 +20,22 @@ export default (state = initialState, action) => {
         ...state,
         playlists: [...state.playlists, action.payload.newPlaylist],
       };
+    case 'UPLOAD_COVER':
+      return {
+        ...state,
+        currentPlaylist: {
+          ...state.currentPlaylist,
+          cover: action.payload.cover,
+        },
+      };
+    case 'UPDATE_COVER':
+      return {
+        ...state,
+        currentPlaylist: {
+          ...state.currentPlaylist,
+          cover: action.payload.cover,
+        },
+      };
     default:
       return state;
   }

@@ -5,6 +5,9 @@ export const backgroundSelectedColor = '#E3E7F5';
 export const whiteColor = '#FFFFFF';
 export const grayColor = '#CFCFCF';
 
+export const iconColor = '#CFCFCF';
+export const iconHoverColor = '#B8B8B8';
+
 export const selectedColor = '#A67BC1';
 
 export const fontColor = '#474747';

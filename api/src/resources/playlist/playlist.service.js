@@ -25,3 +25,7 @@ module.exports.addPlaylist = async function addPlaylist(playlist) {
   return newPlaylist;
 };
 
+module.exports.updatePlaylistCover = async function updatePlaylistCover(playlistId, cover) {
+  await playlistCollection.update({ _id: playlistId }, { $set: { cover : cover } });
+}
+
