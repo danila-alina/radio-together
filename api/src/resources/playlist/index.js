@@ -22,6 +22,6 @@ router.get('/', controller.getPlaylists);
 router.get('/:playlistId', controller.getPlaylistById);
 router.post('/add', controller.addPlaylist);
 router.post('/cover', upload.single('image'), controller.uploadPlaylistCover);
-router.put('/cover', controller.updatePlaylistCover);
+router.put('/:playlistId', controller.updatePlaylist);
 
 module.exports = router.routes();

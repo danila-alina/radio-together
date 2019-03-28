@@ -20,7 +20,7 @@ export const uploadPlaylistCover = (imageData) => {
     .then(payload => dispatch({ type: 'UPLOAD_COVER', payload }));
 };
 
-export const updatePlaylistCover = (playlistId, cover) => {
-  return dispatch => api.updatePlaylistCover(playlistId, cover)
-    .then(payload => dispatch({ type: 'UPDATE_COVER', payload }));
+export const updatePlaylist = (playlistId, part) => {
+  return dispatch => api.updatePlaylist(playlistId, part)
+    .then(payload => dispatch({ type: 'UPDATE_PLAYLIST', payload }));
 };

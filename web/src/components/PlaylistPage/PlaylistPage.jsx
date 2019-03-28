@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
   getPlaylistById,
   uploadPlaylistCover,
-  updatePlaylistCover,
+  updatePlaylist,
 } from 'resources/playlist/playlist.actions';
 import { getGradientColor } from 'services/getGradient';
 import * as playlistSelectors from 'resources/playlist/playlist.selectors';
@@ -22,6 +22,7 @@ class PlaylistPage extends React.Component {
   state = {
     currentTrack: null,
     editPlaylist: false,
+    playlistName: '',
   };
 
   componentDidMount() {
@@ -37,31 +38,47 @@ class PlaylistPage extends React.Component {
 
   onUploadImage = (event) => {
     event.preventDefault();
+
+    const { playlistId } = this.props.match.params;
+    
     const file = event.target.files[0];
     const imageData = new FormData();
     imageData.append('image', file);
+
     this.props.uploadPlaylistCover(imageData)
-      .then(() => {
-        const { playlist } = this.props;
-        const { playlistId } = this.props.match.params;
-        this.props.updatePlaylistCover(playlistId, playlist.cover);
+      .then(({ payload }) => {
+        this.props.updatePlaylist(playlistId, { cover: payload.cover});
       });
   }
 
-  onPlaylistSave = () => {
+  onPlaylistNameChange = (event) => {
+    const name = event.target.value;
     this.setState({
-      editPlaylist: false,
+      playlistName: name,
     });
   }
 
+  onPlaylistSave = () => {
+    const { playlistName } = this.state;
+    const { playlistId } = this.props.match.params;
+    this.props.updatePlaylist(playlistId, { name: playlistName })
+      .then(() => {
+        this.setState({
+          editPlaylist: false,
+        });
+      });
+  }
+
   onPlaylistEdit = () => {
+    const { playlist } = this.props;
     this.setState({
       editPlaylist: true,
+      playlistName: playlist.name,
     });
   }
 
   render() {
-    const { currentTrack, editPlaylist } = this.state;
+    const { currentTrack, editPlaylist, playlistName } = this.state;
     const playlist = this.props.playlist || {};
     const tracks = playlist.tracks || [];
     const gradientColor = getGradientColor(this.props.match.params.playlistId);
@@ -97,7 +114,8 @@ class PlaylistPage extends React.Component {
               ? (
                 <PlaylistNameInput
                   autoFocus
-                  value={playlist.name}
+                  value={playlistName}
+                  onChange={this.onPlaylistNameChange}
                 />
               )
               : <PlaylistName>{playlist.name}</PlaylistName>
@@ -126,7 +144,7 @@ class PlaylistPage extends React.Component {
 PlaylistPage.propTypes = {
   getPlaylistById: PropTypes.func.isRequired,
   uploadPlaylistCover: PropTypes.func.isRequired,
-  updatePlaylistCover: PropTypes.func.isRequired,
+  updatePlaylist: PropTypes.func.isRequired,
   playlist: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -139,14 +157,17 @@ PlaylistPage.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = state => ({
-  playlist: playlistSelectors.getCurrentPlaylist(state),
-});
+const mapStateToProps = (state, ownProps) => {
+  const playlistId = ownProps.match.params.playlistId;
+  return {
+    playlist: playlistSelectors.getCurrentPlaylist(playlistId, state),
+  };
+};
 
 const mapDispatchToProps = {
   getPlaylistById,
   uploadPlaylistCover,
-  updatePlaylistCover,
+  updatePlaylist,
 };
 
 export default connect(

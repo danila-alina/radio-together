@@ -11,30 +11,35 @@ export default (state = initialState, action) => {
         playlists: action.payload.playlists,
       };
     case 'GET_CURRENT_PLAYLIST':
+      const playlists = !state.playlists.length
+        ? [action.payload.playlist]
+        : state.playlists.map((playlist) => {
+          if (playlist._id === action.payload.playlist._id) {
+            return action.payload.playlist;
+          }
+          return playlist;
+        });
       return {
         ...state,
-        currentPlaylist: action.payload.playlist,
+        playlists,
       };
     case 'ADD_PLAYLIST':
       return {
         ...state,
         playlists: [...state.playlists, action.payload.newPlaylist],
       };
-    case 'UPLOAD_COVER':
+    case 'UPDATE_PLAYLIST':
       return {
         ...state,
-        currentPlaylist: {
-          ...state.currentPlaylist,
-          cover: action.payload.cover,
-        },
-      };
-    case 'UPDATE_COVER':
-      return {
-        ...state,
-        currentPlaylist: {
-          ...state.currentPlaylist,
-          cover: action.payload.cover,
-        },
+        playlists: state.playlists.map((playlist) => {
+          if (playlist._id === action.payload.playlistId) {
+            return {
+              ...playlist,
+              ...action.payload.part,
+            };
+          }
+          return playlist;
+        }),
       };
     default:
       return state;

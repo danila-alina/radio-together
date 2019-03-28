@@ -26,10 +26,7 @@ export function uploadPlaylistCover(imageData) {
     .postFile('playlist/cover', imageData);
 }
 
-export function updatePlaylistCover(playlistId, cover) {
+export function updatePlaylist(playlistId, part) {
   return baseApi
-    .put('playlist/cover', null, {
-      playlistId,
-      cover,
-    });
+    .put(`playlist/${playlistId}`, null, part);
 }

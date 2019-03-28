@@ -33,8 +33,21 @@ module.exports.uploadPlaylistCover = async function uploadPlaylistCover(ctx) {
   ctx.body = { cover };
 }
 
-module.exports.updatePlaylistCover = async function updatePlaylistCover(ctx) {
-  const { playlistId, cover } = ctx.request.body;
-  await playlistService.updatePlaylistCover(playlistId, cover);
-  ctx.body = { cover };
+module.exports.updatePlaylist = async function updatePlaylist(ctx) {
+  const { playlistId } = ctx.params;
+  const { cover, name } = ctx.request.body;
+  const playlist = {};
+  
+  if (cover) {
+    playlist.cover = cover
+  }
+  if (name) {
+    playlist.name = name
+  }
+
+  await playlistService.updatePlaylist(playlistId, playlist);
+  ctx.body = {
+    playlistId,
+    part: playlist,
+  };
 }
