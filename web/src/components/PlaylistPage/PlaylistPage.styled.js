@@ -3,6 +3,7 @@ import * as styles from 'constants/styles';
 import { MoreHorizontal } from 'styled-icons/feather';
 import { CompactDisc } from 'styled-icons/fa-solid';
 import { Edit } from 'styled-icons/fa-regular';
+import { Close } from 'styled-icons/material';
 
 export const Page = styled.div`
 `;
@@ -134,6 +135,17 @@ export const SaveButton = styled.div`
   :hover {
     cursor: pointer;
     color: ${styles.fontColor};
+  }
+`;
+
+export const CancelButton = styled(Close)`
+  width: 17px;
+  color: ${styles.iconColor};
+  margin-left: 5px;
+
+  :hover {
+    cursor: pointer;
+    color: ${styles.iconHoverColor};
   }
 `;
 

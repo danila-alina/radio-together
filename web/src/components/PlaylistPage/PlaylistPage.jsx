@@ -89,6 +89,12 @@ class PlaylistPage extends React.Component {
       });
   }
 
+  onCancelEdit = () => {
+    this.setState({
+      editPlaylist: false,
+    });
+  }
+
   render() {
     const {
       currentTrack, editPlaylist, playlistName, showMoreOptions,
@@ -121,7 +127,12 @@ class PlaylistPage extends React.Component {
               <SC.Playlist>Playlist</SC.Playlist>
               <SC.PlaylistOptions>
                 {editPlaylist
-                  ? <SC.SaveButton onClick={this.onPlaylistSave}>Save</SC.SaveButton>
+                  ? (
+                    <React.Fragment>
+                      <SC.SaveButton onClick={this.onPlaylistSave}>Save</SC.SaveButton>
+                      <SC.CancelButton onClick={this.onCancelEdit} />
+                    </React.Fragment>
+                  )
                   : (
                     <React.Fragment>
                       <SC.EditButton onClick={this.onPlaylistEdit} />
@@ -189,13 +200,17 @@ PlaylistPage.propTypes = {
     PropTypes.object,
     PropTypes.bool,
     PropTypes.array,
-  ])).isRequired,
+  ])),
   match: PropTypes.shape({
     params: PropTypes.object.isRequired,
   }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+};
+
+PlaylistPage.defaultProps = {
+  playlist: {},
 };
 
 const mapStateToProps = (state, ownProps) => {
