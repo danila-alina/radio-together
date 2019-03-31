@@ -24,3 +24,8 @@ export const updatePlaylist = (playlistId, part) => {
   return dispatch => api.updatePlaylist(playlistId, part)
     .then(payload => dispatch({ type: 'UPDATE_PLAYLIST', payload }));
 };
+
+export const deletePlaylist = (playlistId) => {
+  return dispatch => api.deletePlaylist(playlistId)
+    .then(payload => dispatch({ type: 'DELETE_PLAYLIST', payload }));
+};

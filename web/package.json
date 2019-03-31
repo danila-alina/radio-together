@@ -38,6 +38,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
+    "react-onclickoutside": "^6.8.0",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-sound": "^1.2.0",

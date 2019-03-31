@@ -1,27 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import {
-  getPlaylistById,
-  uploadPlaylistCover,
-  updatePlaylist,
-} from 'resources/playlist/playlist.actions';
 import { getGradientColor } from 'services/getGradient';
+import * as playlistActions from 'resources/playlist/playlist.actions';
 import * as playlistSelectors from 'resources/playlist/playlist.selectors';
 
 import Track from './components/Track';
-import {
-  Page, PlaylistInfoContainer, PlaylistCover, Cover,
-  GeneratedCover, PlaylistImage, FileInputContaier, FileInput,
-  PlaylistInfo, Playlist, PlaylistName, TrackListContainer,
-  PlaylistAdditional, EditButton, PlaylistNameInput, SaveButton,
-} from './PlaylistPage.styled';
+import MenuPopup from './components/MenuPopup';
+import * as SC from './PlaylistPage.styled';
 
 class PlaylistPage extends React.Component {
   state = {
     currentTrack: null,
     editPlaylist: false,
+    showMoreOptions: false,
     playlistName: '',
   };
 
@@ -40,14 +34,14 @@ class PlaylistPage extends React.Component {
     event.preventDefault();
 
     const { playlistId } = this.props.match.params;
-    
+
     const file = event.target.files[0];
     const imageData = new FormData();
     imageData.append('image', file);
 
     this.props.uploadPlaylistCover(imageData)
       .then(({ payload }) => {
-        this.props.updatePlaylist(playlistId, { cover: payload.cover});
+        this.props.updatePlaylist(playlistId, { cover: payload.cover });
       });
   }
 
@@ -77,54 +71,97 @@ class PlaylistPage extends React.Component {
     });
   }
 
+  toggleOptionsMenu = () => {
+    const { showMoreOptions } = this.state;
+    this.setState({
+      showMoreOptions: !showMoreOptions,
+    });
+  }
+
+  onCopyLink = () => {
+  }
+
+  onDeletePlaylist = () => {
+    const { playlistId } = this.props.match.params;
+    this.props.deletePlaylist(playlistId)
+      .then(() => {
+        this.props.history.push('/my-music');
+      });
+  }
+
   render() {
-    const { currentTrack, editPlaylist, playlistName } = this.state;
+    const {
+      currentTrack, editPlaylist, playlistName, showMoreOptions,
+    } = this.state;
     const playlist = this.props.playlist || {};
     const tracks = playlist.tracks || [];
     const gradientColor = getGradientColor(this.props.match.params.playlistId);
     return (
-      <Page>
-        <PlaylistInfoContainer>
-          <PlaylistCover>
+      <SC.Page>
+        <SC.PlaylistInfoContainer>
+          <SC.PlaylistCover>
             {playlist.cover
-              ? <Cover cover={playlist.cover} />
+              ? <SC.Cover cover={playlist.cover} />
               : (
-                <GeneratedCover
+                <SC.GeneratedCover
                   topColor={gradientColor.topColor}
                   bottomColor={gradientColor.bottomColor}
                 >
-                  <PlaylistImage />
-                </GeneratedCover>
+                  <SC.PlaylistImage />
+                </SC.GeneratedCover>
               )
             }
-            <FileInputContaier>
-              <FileInput onChange={this.onUploadImage} />
+            <SC.FileInputContaier>
+              <SC.FileInput onChange={this.onUploadImage} />
               Upload Image
-            </FileInputContaier>
-          </PlaylistCover>
-          <PlaylistInfo>
-            <PlaylistAdditional>
-              <Playlist>Playlist</Playlist>
-              {editPlaylist
-                ? <SaveButton onClick={this.onPlaylistSave}>Save</SaveButton>
-                : <EditButton onClick={this.onPlaylistEdit} />
-              }
-            </PlaylistAdditional>
+            </SC.FileInputContaier>
+          </SC.PlaylistCover>
+          <SC.PlaylistInfo>
+            <SC.PlaylistAdditional>
+              <SC.Playlist>Playlist</SC.Playlist>
+              <SC.PlaylistOptions>
+                {editPlaylist
+                  ? <SC.SaveButton onClick={this.onPlaylistSave}>Save</SC.SaveButton>
+                  : (
+                    <React.Fragment>
+                      <SC.EditButton onClick={this.onPlaylistEdit} />
+                      <SC.MoreButton onClick={this.toggleOptionsMenu} />
+                    </React.Fragment>
+                  )
+                }
+                {showMoreOptions
+                  && (
+                    <MenuPopup
+                      options={[{
+                        id: 1,
+                        name: 'Copy Link',
+                        action: this.onCopyLink,
+                      }, {
+                        id: 2,
+                        name: 'Delete Playlist',
+                        action: this.onDeletePlaylist,
+                      }]}
+                      toggleMenu={this.toggleOptionsMenu}
+                    />
+                  )
+                }
+              </SC.PlaylistOptions>
+            </SC.PlaylistAdditional>
             {editPlaylist
               ? (
-                <PlaylistNameInput
+                <SC.PlaylistNameInput
                   autoFocus
                   value={playlistName}
                   onChange={this.onPlaylistNameChange}
                 />
               )
-              : <PlaylistName>{playlist.name}</PlaylistName>
+              : <SC.PlaylistName>{playlist.name}</SC.PlaylistName>
             }
-          </PlaylistInfo>
-        </PlaylistInfoContainer>
-        <TrackListContainer>
+          </SC.PlaylistInfo>
+        </SC.PlaylistInfoContainer>
+        <SC.TrackListContainer>
           {tracks.map((track) => {
-            return (
+            return (typeof track === 'object') && (
               <Track
                 key={track._id}
                 track={track.name}
@@ -135,8 +172,8 @@ class PlaylistPage extends React.Component {
               />
             );
           })}
-        </TrackListContainer>
-      </Page>
+        </SC.TrackListContainer>
+      </SC.Page>
     );
   }
 }
@@ -145,6 +182,7 @@ PlaylistPage.propTypes = {
   getPlaylistById: PropTypes.func.isRequired,
   uploadPlaylistCover: PropTypes.func.isRequired,
   updatePlaylist: PropTypes.func.isRequired,
+  deletePlaylist: PropTypes.func.isRequired,
   playlist: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -155,22 +193,26 @@ PlaylistPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object.isRequired,
   }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const playlistId = ownProps.match.params.playlistId;
+  const { playlistId } = ownProps.match.params;
   return {
     playlist: playlistSelectors.getCurrentPlaylist(playlistId, state),
   };
 };
 
 const mapDispatchToProps = {
-  getPlaylistById,
-  uploadPlaylistCover,
-  updatePlaylist,
+  getPlaylistById: playlistActions.getPlaylistById,
+  uploadPlaylistCover: playlistActions.uploadPlaylistCover,
+  updatePlaylist: playlistActions.updatePlaylist,
+  deletePlaylist: playlistActions.deletePlaylist,
 };
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PlaylistPage);
+)(PlaylistPage));

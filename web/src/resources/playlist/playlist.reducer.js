@@ -41,6 +41,13 @@ export default (state = initialState, action) => {
           return playlist;
         }),
       };
+    case 'DELETE_PLAYLIST':
+      return {
+        ...state,
+        playlists: state.playlists.filter((playlist) => {
+          return playlist._id !== action.payload.playlistId;
+        }),
+      };
     default:
       return state;
   }

@@ -29,3 +29,7 @@ module.exports.updatePlaylist = async function updatePlaylist(playlistId, playli
   await playlistCollection.update({ _id: playlistId }, { $set: playlist });
 }
 
+module.exports.deletePlaylist = async function deletePlaylist(playlistId) {
+  await playlistCollection.remove({ _id: playlistId });
+}
+

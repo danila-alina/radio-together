@@ -1,0 +1,30 @@
+import styled from 'styled-components';
+import * as styles from 'constants/styles';
+
+export const Menu = styled.div`
+  position: absolute;
+  background-color: ${styles.backgroundColor};
+  border: 1px solid ${styles.grayColor};
+  border-radius: 10px;
+  width: 150px;
+  font-size: 14px;
+  top: 5px;
+  left: 25px;
+`;
+
+export const Option = styled.div`
+  padding: 10px;
+
+  :hover {
+    cursor: pointer;
+    background-color: ${styles.backgroundLightGrayColor};
+    :first-child {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    :last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+  }
+`;

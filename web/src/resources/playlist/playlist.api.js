@@ -30,3 +30,8 @@ export function updatePlaylist(playlistId, part) {
   return baseApi
     .put(`playlist/${playlistId}`, null, part);
 }
+
+export function deletePlaylist(playlistId) {
+  return baseApi
+    .del(`playlist/${playlistId}`);
+}

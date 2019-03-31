@@ -51,3 +51,11 @@ module.exports.updatePlaylist = async function updatePlaylist(ctx) {
     part: playlist,
   };
 }
+
+module.exports.deletePlaylist = async function deletePlaylist(ctx) {
+  const { playlistId } = ctx.params;
+  await playlistService.deletePlaylist(playlistId);
+  ctx.body = {
+    playlistId,
+  }
+}

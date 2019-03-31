@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as styles from 'constants/styles';
+import { MoreHorizontal } from 'styled-icons/feather';
 import { CompactDisc } from 'styled-icons/fa-solid';
 import { Edit } from 'styled-icons/fa-regular';
 
@@ -75,7 +76,7 @@ export const PlaylistImage = styled(CompactDisc)`
 
 export const PlaylistInfo = styled.div`
   margin-left: 20px;
-  width: 200px;
+  width: 250px;
 `;
 
 export const PlaylistName = styled.div`
@@ -91,8 +92,28 @@ export const PlaylistAdditional = styled.div`
   height: 20px;
 `;
 
+export const PlaylistOptions = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 6px;
+  position: relative;
+`;
+
+export const MoreButton = styled(MoreHorizontal)`
+  width: 20px;
+  padding: 2px;
+  margin-left: 5px;
+  color: ${styles.iconColor};
+  
+  :hover {
+    cursor: pointer;
+    color: ${styles.iconHoverColor};
+    background-color: ${styles.backgroundGrayColor};
+    border-radius: 11px;
+  }
+`;
+
 export const PlaylistNameInput = styled.input`
-  // border: 1px solid ${styles.grayColor};
   border: 1px solid ${styles.backgroundGrayColor};
   background-color: ${styles.backgroundGrayColor};
   border-radius: 10px;
@@ -109,7 +130,6 @@ export const SaveButton = styled.div`
   font-size: 14px;
   font-weight: ${styles.fontLight};
   text-transform: uppercase;
-  margin-right: 6px;
   
   :hover {
     cursor: pointer;
@@ -120,7 +140,6 @@ export const SaveButton = styled.div`
 export const EditButton = styled(Edit)`
   width: 18px;
   color: ${styles.iconColor};
-  margin-right: 6px;
 
   :hover {
     cursor: pointer;
