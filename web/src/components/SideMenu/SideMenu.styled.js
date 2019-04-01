@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 export const StyledMenu = styled.div`
   width: 300px;
-
+  min-width: 300px;
   background-color: ${styles.backgroundGrayColor};
 `;
 

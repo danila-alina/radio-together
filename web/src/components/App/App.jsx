@@ -10,7 +10,7 @@ import SideMenu from 'components/SideMenu';
 
 import { getAuth } from 'resources/user/user.selectors';
 
-import { Layout, Main } from './App.styled';
+import * as SC from './App.styled';
 
 class App extends React.Component {
   render() {
@@ -18,13 +18,13 @@ class App extends React.Component {
 
     if (isAuthorised) {
       return (
-        <Layout>
+        <SC.Layout>
           <SideMenu />
-          <Main>
+          <SC.Main>
             <Header />
             <Routes />
-          </Main>
-        </Layout>
+          </SC.Main>
+        </SC.Layout>
       );
     }
     return <AuthRoutes />;

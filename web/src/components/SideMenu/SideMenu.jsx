@@ -1,27 +1,27 @@
 import React from 'react';
 
-import {
-  StyledMenu, Title,
-  MenuList, MenuItem,
-} from './SideMenu.styled';
+import CurrentTrack from './components/CurrentTrack';
+
+import * as SC from './SideMenu.styled';
 
 class SideMenu extends React.Component {
   render() {
     return (
-      <StyledMenu>
-        <Title>Radio Together</Title>
-        <MenuList>
-          <MenuItem to="/" activeClassName="selectedItem" exact>
+      <SC.StyledMenu>
+        <SC.Title>Radio Together</SC.Title>
+        <SC.MenuList>
+          <SC.MenuItem to="/" activeClassName="selectedItem" exact>
             Home
-          </MenuItem>
-          <MenuItem to="/my-music" activeClassName="selectedItem" exact>
+          </SC.MenuItem>
+          <SC.MenuItem to="/my-music" activeClassName="selectedItem" exact>
             My Music
-          </MenuItem>
-          <MenuItem to="/recommendations" activeClassName="selectedItem" exact>
+          </SC.MenuItem>
+          <SC.MenuItem to="/recommendations" activeClassName="selectedItem" exact>
             Recommendations
-          </MenuItem>
-        </MenuList>
-      </StyledMenu>
+          </SC.MenuItem>
+        </SC.MenuList>
+        <CurrentTrack />
+      </SC.StyledMenu>
     );
   }
 }
