@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import { getGradientColor } from 'services/getGradient';
 import * as playlistActions from 'resources/playlist/playlist.actions';
+import * as currentTrackActions from 'resources/currentTrack/currentTrack.actions';
 import * as playlistSelectors from 'resources/playlist/playlist.selectors';
 
 import Track from './components/Track';
@@ -25,6 +26,11 @@ class PlaylistPage extends React.Component {
   }
 
   onSelectTrack = (trackId) => {
+    const { playlist } = this.props;
+    const track = playlist.tracks.find((item) => {
+      return item._id === trackId;
+    });
+    this.props.setCurrentTrack(track);
     this.setState({
       currentTrack: trackId,
     });
@@ -177,7 +183,7 @@ class PlaylistPage extends React.Component {
                 key={track._id}
                 track={track.name}
                 artist={track.artist}
-                cover={track.cover}
+                cover={track.cover.url}
                 selected={currentTrack === track._id}
                 onSelectTrack={() => this.onSelectTrack(track._id)}
               />
@@ -194,6 +200,7 @@ PlaylistPage.propTypes = {
   uploadPlaylistCover: PropTypes.func.isRequired,
   updatePlaylist: PropTypes.func.isRequired,
   deletePlaylist: PropTypes.func.isRequired,
+  setCurrentTrack: PropTypes.func.isRequired,
   playlist: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -225,6 +232,7 @@ const mapDispatchToProps = {
   uploadPlaylistCover: playlistActions.uploadPlaylistCover,
   updatePlaylist: playlistActions.updatePlaylist,
   deletePlaylist: playlistActions.deletePlaylist,
+  setCurrentTrack: currentTrackActions.setCurrentTrack,
 };
 
 export default withRouter(connect(

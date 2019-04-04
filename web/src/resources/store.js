@@ -4,10 +4,12 @@ import combineSectionReducers from 'combine-section-reducers';
 
 import user from './user/user.reducer';
 import playlist from './playlist/playlist.reducer';
+import currentTrack from './currentTrack/currentTrack.reducer';
 
 const reducer = combineSectionReducers({
   user,
   playlist,
+  currentTrack,
 });
 
 export default createStore(

@@ -1,44 +1,87 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
+import * as currentTrackSelectors from 'resources/currentTrack/currentTrack.selectors';
+import * as currentTrackActions from 'resources/currentTrack/currentTrack.actions';
+
+import * as styles from 'constants/styles';
 import * as SC from './CurrentTrack.styled';
 
 class CurrentTrack extends React.Component {
   render() {
+    const { currentTrack } = this.props;
+
+    if (!currentTrack.name) {
+      return null;
+    }
+
     const trackMinutes = 1;
     const trackSeconds = 30;
     const progress = 40;
-    const color = '#A67BC1';
+    const trackColor = currentTrack.cover.colors.length
+      ? currentTrack.cover.colors[0] : styles.selectedColor;
+
     return (
       <SC.TrackContainer>
-        <SC.Cover cover="https://t2.genius.com/unsafe/220x220/https%3A%2F%2Fimages.genius.com%2F1bc940fc0543d4b3193d0d8fee8012ba.1000x1000x1.jpg" />
-        <SC.TrackInfo>
-          <SC.TrackName>I'll Keep You Sane</SC.TrackName>
-          <SC.ArtistName>Timmies, Mishaal</SC.ArtistName>
-        </SC.TrackInfo>
+        <SC.TrackInfoContainer>
+          <SC.Cover cover={currentTrack.cover.url}>
+            <SC.PlayButton />
+          </SC.Cover>
+          <SC.TrackInfo>
+            <SC.TrackName>{currentTrack.name}</SC.TrackName>
+            <SC.ArtistName>{currentTrack.artist}</SC.ArtistName>
+          </SC.TrackInfo>
+        </SC.TrackInfoContainer>
         <SC.ProgressInfo>
-          <SC.Time>
-            {trackMinutes}
-            :
-            {trackSeconds < 10 ? `0${trackSeconds}` : trackSeconds}
-          </SC.Time>
           <SC.ProgressContainer>
             <SC.Progress
               progress={progress}
-              color={color}
+              color={trackColor}
             />
           </SC.ProgressContainer>
-          <SC.Time>3:00</SC.Time>
         </SC.ProgressInfo>
+        <SC.TrackSettings>
+          <SC.TimeLeft>
+            {trackMinutes}
+            :
+            {trackSeconds < 10 ? `0${trackSeconds}` : trackSeconds}
+          </SC.TimeLeft>
+          <SC.PlayButtons>
+            <SC.PreviousTrack />
+            <SC.PlayTrack />
+            <SC.NextTrack />
+          </SC.PlayButtons>
+          <SC.TimeRight>3:00</SC.TimeRight>
+        </SC.TrackSettings>
       </SC.TrackContainer>
     );
   }
 }
 
 CurrentTrack.propTypes = {
+  currentTrack: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+    PropTypes.bool,
+    PropTypes.array,
+  ])).isRequired,
 };
 
 CurrentTrack.defaultProps = {
 };
 
-export default CurrentTrack;
+const mapStateToProps = (state) => {
+  return {
+    currentTrack: currentTrackSelectors.getCurrentTrack(state),
+  };
+};
+
+const mapDispatchToProps = {
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CurrentTrack);
