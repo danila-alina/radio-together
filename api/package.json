@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_PATH=src nodemon src/server.js"
+    "start": "NODE_PATH=src nodemon src/server.js",
+    "lint": "eslint ./src"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,9 @@
     "monk": "6.0.6"
   },
   "devDependencies": {
+    "eslint": "5.16.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.16.0",
     "nodemon": "1.18.10"
   }
 }

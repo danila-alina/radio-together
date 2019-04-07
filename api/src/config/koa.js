@@ -1,6 +1,6 @@
-const routes = require('./routes');
 const bodyParser = require('koa-bodyparser');
 const cors = require('koa-cors');
+const routes = require('./routes');
 
 module.exports = (app) => {
   app.use(cors());

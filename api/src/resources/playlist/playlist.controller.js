@@ -1,6 +1,6 @@
 const config = require('config/config');
-const playlistService = require('./playlist.service');
 const trackService = require('resources/track/track.service');
+const playlistService = require('./playlist.service');
 
 module.exports.getPlaylists = async (ctx) => {
   const playlists = await playlistService.getPlaylists();
@@ -11,12 +11,12 @@ module.exports.getPlaylistById = async (ctx) => {
   const { playlistId } = ctx.params;
   const playlist = await playlistService.getPlaylistById(playlistId);
   const tracks = await trackService.getTracksByIds(playlist.tracks);
-  
+
   ctx.body = {
     playlist: {
       _id: playlist._id,
       name: playlist.name,
-      tracks: tracks,
+      tracks,
       cover: playlist.cover,
     },
   };
@@ -31,18 +31,18 @@ module.exports.addPlaylist = async (ctx) => {
 module.exports.uploadPlaylistCover = async (ctx) => {
   const cover = `${config.imageUrl}/${ctx.req.file.filename}`;
   ctx.body = { cover };
-}
+};
 
 module.exports.updatePlaylist = async (ctx) => {
   const { playlistId } = ctx.params;
   const { cover, name } = ctx.request.body;
   const playlist = {};
-  
+
   if (cover) {
-    playlist.cover = cover
+    playlist.cover = cover;
   }
   if (name) {
-    playlist.name = name
+    playlist.name = name;
   }
 
   await playlistService.updatePlaylist(playlistId, playlist);
@@ -50,12 +50,12 @@ module.exports.updatePlaylist = async (ctx) => {
     playlistId,
     part: playlist,
   };
-}
+};
 
 module.exports.deletePlaylist = async (ctx) => {
   const { playlistId } = ctx.params;
   await playlistService.deletePlaylist(playlistId);
   ctx.body = {
     playlistId,
-  }
-}
+  };
+};

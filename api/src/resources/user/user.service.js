@@ -1,4 +1,3 @@
-const monk = require('monk');
 const db = require('db');
 
 const userCollection = db.get('user', {
@@ -8,17 +7,21 @@ const userCollection = db.get('user', {
 module.exports.setPlaylistToRadiostation = (userId, playlistId) => {
   return userCollection.findOneAndUpdate({ _id: userId }, {
     $set: {
-      "radiostation.playlist": playlistId,
-      "radiostation.listeners": [],
+      'radiostation.playlistId': playlistId,
+      'radiostation.listeners': [],
     },
   });
-}
+};
 
 module.exports.unsetRadiostation = (userId) => {
   return userCollection.findOneAndUpdate({ _id: userId }, {
     $set: {
-      "radiostation.playlist": null,
-      "radiostation.listeners": [],
+      'radiostation.playlistId': null,
+      'radiostation.listeners': [],
     },
   });
-}
+};
+
+module.exports.getUserById = (userId) => {
+  return userCollection.findOne({ _id: userId });
+};

@@ -1,12 +1,10 @@
-const controller = require('./playlist.controller');
 const config = require('config/config');
 const multer = require('koa-multer');
 const router = require('koa-router')();
+const controller = require('./playlist.controller');
 
 const storage = multer.diskStorage({
-  destination: (request, file, cb) =>
-    cb(null, config.pathToServe),
-
+  destination: (request, file, cb) => cb(null, config.pathToServe),
   filename: (request, file, cb) => {
     cb(null, `${Date.now()}.${file.originalname.split('.').pop()}`);
   },

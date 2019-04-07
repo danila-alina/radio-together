@@ -20,3 +20,8 @@ export function unsetRadiostation() {
   return baseApi
     .post('user/unset-radiostation');
 }
+
+export function getRadiostation() {
+  return baseApi
+    .get('user/radiostation');
+}

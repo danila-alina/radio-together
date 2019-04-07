@@ -5,14 +5,12 @@ const playlistCollection = db.get('playlist', {
   castIds: false,
 });
 
-module.exports.getPlaylists = async function getPlaylists() {
-  const playlists = await playlistCollection.find({});
-  return playlists;
+module.exports.getPlaylists = () => {
+  return playlistCollection.find({});
 };
 
-module.exports.getPlaylistById = async function getTracksIds(playlistId) {
-  const playlist = await playlistCollection.findOne({ _id: playlistId });
-  return playlist;
+module.exports.getPlaylistById = (playlistId) => {
+  return playlistCollection.findOne({ _id: playlistId });
 };
 
 module.exports.addPlaylist = async function addPlaylist(playlist) {
@@ -25,11 +23,10 @@ module.exports.addPlaylist = async function addPlaylist(playlist) {
   return newPlaylist;
 };
 
-module.exports.updatePlaylist = async function updatePlaylist(playlistId, playlist) {
-  await playlistCollection.update({ _id: playlistId }, { $set: playlist });
-}
+module.exports.updatePlaylist = (playlistId, playlist) => {
+  playlistCollection.update({ _id: playlistId }, { $set: playlist });
+};
 
-module.exports.deletePlaylist = async function deletePlaylist(playlistId) {
-  await playlistCollection.remove({ _id: playlistId });
-}
-
+module.exports.deletePlaylist = (playlistId) => {
+  playlistCollection.remove({ _id: playlistId });
+};

@@ -17,3 +17,8 @@ export const unsetRadiostation = () => {
   return dispatch => api.unsetRadiostation()
     .then(payload => dispatch({ type: 'UNSET_RADIOSTATION', payload }));
 };
+
+export const getRadiostation = () => {
+  return dispatch => api.getRadiostation()
+    .then(payload => dispatch({ type: 'GET_RADIOSTATION', payload }));
+};

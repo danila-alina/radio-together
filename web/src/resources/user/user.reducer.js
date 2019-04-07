@@ -10,6 +10,11 @@ export default (state = initialState, action) => {
         ...state,
         isAuthorised: true,
       };
+    case 'GET_RADIOSTATION':
+      return {
+        ...state,
+        radiostation: action.payload.radiostation,
+      };
     case 'SET_RADIOSTATION':
       return {
         ...state,
