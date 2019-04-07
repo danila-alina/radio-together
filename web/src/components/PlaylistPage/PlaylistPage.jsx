@@ -7,6 +7,7 @@ import { getGradientColor } from 'services/getGradient';
 import * as playlistActions from 'resources/playlist/playlist.actions';
 import * as currentTrackActions from 'resources/currentTrack/currentTrack.actions';
 import * as userActions from 'resources/user/user.actions';
+import * as userSelectors from 'resources/user/user.selectors';
 import * as playlistSelectors from 'resources/playlist/playlist.selectors';
 
 import TrackList from './components/TrackList';
@@ -124,7 +125,8 @@ class PlaylistPage extends React.Component {
       currentTrackId, editPlaylist, playlistName,
       showMenu, isSetToRadiostation,
     } = this.state;
-    const playlist = this.props.playlist || {};
+    const { playlist, radiostation } = this.props;
+    const { playlistId } = this.props.match.params;
     const tracks = playlist.tracks || [];
     const gradientColor = getGradientColor(this.props.match.params.playlistId);
     return (
@@ -172,7 +174,9 @@ class PlaylistPage extends React.Component {
                         onDeletePlaylist={this.onDeletePlaylist}
                         onSetToRadiostation={this.onSetToRadiostation}
                         onUnsetFromRadiostation={this.onUnsetFromRadiostation}
-                        isSetToRadiostation={isSetToRadiostation}
+                        isSetToRadiostation={
+                          isSetToRadiostation || radiostation.playlistId === playlistId
+                        }
                         toggleMenu={this.toggleMenu}
                       />
                     )
@@ -190,12 +194,10 @@ class PlaylistPage extends React.Component {
                 : <SC.PlaylistName>{playlist.name}</SC.PlaylistName>
               }
             </SC.PlaylistInfoTop>
-            {isSetToRadiostation
+            {(isSetToRadiostation || radiostation.playlistId === playlistId)
               && (
                 <SC.RadiostationContainer>
-                  <SC.RadiostationIcon
-                    onClick={this.onSetToRadiostation}
-                  />
+                  <SC.RadiostationIcon />
                   <SC.RadiostationText>At Radiostation</SC.RadiostationText>
                 </SC.RadiostationContainer>
               )
@@ -227,6 +229,12 @@ PlaylistPage.propTypes = {
     PropTypes.bool,
     PropTypes.array,
   ])),
+  radiostation: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+    PropTypes.array,
+  ])).isRequired,
   match: PropTypes.shape({
     params: PropTypes.object.isRequired,
   }).isRequired,
@@ -243,6 +251,7 @@ const mapStateToProps = (state, ownProps) => {
   const { playlistId } = ownProps.match.params;
   return {
     playlist: playlistSelectors.getCurrentPlaylist(playlistId, state),
+    radiostation: userSelectors.getRadiostation(state),
   };
 };
 

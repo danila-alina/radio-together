@@ -85,10 +85,7 @@ MyAccountPage.propTypes = {
   ])).isRequired,
 };
 
-MyAccountPage.defaultProps = {
-};
-
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     radiostation: userSelectors.getRadiostation(state),
   };

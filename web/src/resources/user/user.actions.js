@@ -8,6 +8,11 @@ export const setAuth = () => {
   return dispatch => dispatch({ type: 'SET_AUTH' });
 };
 
+export const getUserInfo = () => {
+  return dispatch => api.getUserInfo()
+    .then(payload => dispatch({ type: 'GET_USER', payload }));
+};
+
 export const setPlaylistToRadiostation = (playlistId) => {
   return dispatch => api.setPlaylistToRadiostation(playlistId)
     .then(payload => dispatch({ type: 'SET_RADIOSTATION', payload }));

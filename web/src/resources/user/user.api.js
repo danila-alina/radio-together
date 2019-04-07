@@ -11,6 +11,11 @@ export function signIn() {
     .get('user/sign-in');
 }
 
+export function getUserInfo() {
+  return baseApi
+    .get('user/');
+}
+
 export function setPlaylistToRadiostation(playlistId) {
   return baseApi
     .post('user/set-radiostation', null, { playlistId });

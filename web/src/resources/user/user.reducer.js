@@ -1,5 +1,9 @@
 const initialState = {
   isAuthorised: false,
+  firstName: '',
+  lastName: '',
+  followers: [],
+  following: [],
   radiostation: {},
 };
 
@@ -9,6 +13,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAuthorised: true,
+      };
+    case 'GET_USER':
+      return {
+        ...state,
+        ...action.payload.user,
       };
     case 'GET_RADIOSTATION':
       return {

@@ -1,27 +1,47 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import {
-  StyledHeader, Search, StyledNavLink,
-  AvatarContainer, UserName, Avatar,
-} from './Header.styled';
+import * as userSelectors from 'resources/user/user.selectors';
+
+import * as SC from './Header.styled';
 
 class Header extends React.Component {
   render() {
+    const { user } = this.props;
     return (
-      <StyledHeader>
-        <Search placeholder="Search for music, people, radiostations" />
-        <AvatarContainer>
-          <StyledNavLink to="/my-account">
-            <UserName>Alina Arlova</UserName>
-          </StyledNavLink>
+      <SC.StyledHeader>
+        <SC.Search placeholder="Search for music, people, radiostations" />
+        <SC.AvatarContainer>
+          <SC.StyledNavLink to="/my-account">
+            <SC.UserName>{`${user.firstName} ${user.lastName}`}</SC.UserName>
+          </SC.StyledNavLink>
           <NavLink to="/my-account">
-            <Avatar />
+            <SC.Avatar />
           </NavLink>
-        </AvatarContainer>
-      </StyledHeader>
+        </SC.AvatarContainer>
+      </SC.StyledHeader>
     );
   }
 }
 
-export default Header;
+Header.propTypes = {
+  user: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+    PropTypes.array,
+    PropTypes.bool,
+  ])).isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: userSelectors.getUserInfo(state),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+)(Header);

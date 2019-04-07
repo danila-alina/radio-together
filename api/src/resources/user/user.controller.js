@@ -16,6 +16,14 @@ module.exports.signIn = async function signIn(ctx) {
   };
 };
 
+module.exports.getUserInfo = async (ctx) => {
+  const userId = '5ca92ad73257a82200bb0f84';
+  const user = await userService.getUserInfo(userId);
+  ctx.body = {
+    user,
+  };
+};
+
 module.exports.setPlaylistToRadiostation = async (ctx) => {
   const { playlistId } = ctx.request.body;
   const userId = '5ca92ad73257a82200bb0f84';

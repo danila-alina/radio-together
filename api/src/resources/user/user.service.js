@@ -4,6 +4,10 @@ const userCollection = db.get('user', {
   castIds: false,
 });
 
+module.exports.getUserInfo = (userId) => {
+  return userCollection.findOne({ _id: userId });
+};
+
 module.exports.setPlaylistToRadiostation = (userId, playlistId) => {
   return userCollection.findOneAndUpdate({ _id: userId }, {
     $set: {
