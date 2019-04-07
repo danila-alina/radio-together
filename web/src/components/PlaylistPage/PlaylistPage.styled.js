@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import * as styles from 'constants/styles';
-import { MoreHorizontal } from 'styled-icons/feather';
+import { MoreHorizontal, Radio, Edit } from 'styled-icons/feather';
 import { CompactDisc } from 'styled-icons/fa-solid';
-import { Edit } from 'styled-icons/fa-regular';
 import { Close } from 'styled-icons/material';
 
 export const Page = styled.div`
@@ -78,7 +77,12 @@ export const PlaylistImage = styled(CompactDisc)`
 export const PlaylistInfo = styled.div`
   margin-left: 20px;
   width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
+
+export const PlaylistInfoTop = styled.div``;
 
 export const PlaylistName = styled.div`
   margin-top: 10px;
@@ -104,6 +108,7 @@ export const MoreButton = styled(MoreHorizontal)`
   width: 20px;
   padding: 2px;
   margin-left: 5px;
+  fill: transparent;
   color: ${styles.iconColor};
   
   :hover {
@@ -151,6 +156,7 @@ export const CancelButton = styled(Close)`
 
 export const EditButton = styled(Edit)`
   width: 18px;
+  fill: transparent;
   color: ${styles.iconColor};
 
   :hover {
@@ -159,5 +165,20 @@ export const EditButton = styled(Edit)`
   }
 `;
 
-export const TrackListContainer = styled.div`
+export const RadiostationContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+`;
+
+export const RadiostationIcon = styled(Radio)`
+  width: 25px;
+  fill: transparent;
+  color: ${styles.iconColor};
+`;
+
+export const RadiostationText = styled.div`
+  font-size: 14px;
+  font-weight: 300;
+  margin-left: 5px;
 `;

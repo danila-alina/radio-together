@@ -6,17 +6,19 @@ import { withRouter } from 'react-router-dom';
 import { getGradientColor } from 'services/getGradient';
 import * as playlistActions from 'resources/playlist/playlist.actions';
 import * as currentTrackActions from 'resources/currentTrack/currentTrack.actions';
+import * as userActions from 'resources/user/user.actions';
 import * as playlistSelectors from 'resources/playlist/playlist.selectors';
 
-import Track from './components/Track';
-import MenuPopup from './components/MenuPopup';
+import TrackList from './components/TrackList';
+import PlaylistMenu from './components/PlaylistMenu';
 import * as SC from './PlaylistPage.styled';
 
 class PlaylistPage extends React.Component {
   state = {
-    currentTrack: null,
+    currentTrackId: null,
     editPlaylist: false,
-    showMoreOptions: false,
+    showMenu: false,
+    isSetToRadiostation: false,
     playlistName: '',
   };
 
@@ -32,7 +34,7 @@ class PlaylistPage extends React.Component {
     });
     this.props.setCurrentTrack(track);
     this.setState({
-      currentTrack: trackId,
+      currentTrackId: trackId,
     });
   }
 
@@ -77,14 +79,11 @@ class PlaylistPage extends React.Component {
     });
   }
 
-  toggleOptionsMenu = () => {
-    const { showMoreOptions } = this.state;
+  toggleMenu = () => {
+    const { showMenu } = this.state;
     this.setState({
-      showMoreOptions: !showMoreOptions,
+      showMenu: !showMenu,
     });
-  }
-
-  onCopyLink = () => {
   }
 
   onDeletePlaylist = () => {
@@ -101,9 +100,29 @@ class PlaylistPage extends React.Component {
     });
   }
 
+  onSetToRadiostation = () => {
+    const { playlistId } = this.props.match.params;
+    this.props.setPlaylistToRadiostation(playlistId)
+      .then(() => {
+        this.setState({
+          isSetToRadiostation: true,
+        });
+      });
+  }
+
+  onUnsetFromRadiostation = () => {
+    this.props.unsetRadiostation()
+      .then(() => {
+        this.setState({
+          isSetToRadiostation: false,
+        });
+      });
+  }
+
   render() {
     const {
-      currentTrack, editPlaylist, playlistName, showMoreOptions,
+      currentTrackId, editPlaylist, playlistName,
+      showMenu, isSetToRadiostation,
     } = this.state;
     const playlist = this.props.playlist || {};
     const tracks = playlist.tracks || [];
@@ -129,67 +148,65 @@ class PlaylistPage extends React.Component {
             </SC.FileInputContaier>
           </SC.PlaylistCover>
           <SC.PlaylistInfo>
-            <SC.PlaylistAdditional>
-              <SC.Playlist>Playlist</SC.Playlist>
-              <SC.PlaylistOptions>
-                {editPlaylist
-                  ? (
-                    <React.Fragment>
-                      <SC.SaveButton onClick={this.onPlaylistSave}>Save</SC.SaveButton>
-                      <SC.CancelButton onClick={this.onCancelEdit} />
-                    </React.Fragment>
-                  )
-                  : (
-                    <React.Fragment>
-                      <SC.EditButton onClick={this.onPlaylistEdit} />
-                      <SC.MoreButton onClick={this.toggleOptionsMenu} />
-                    </React.Fragment>
-                  )
-                }
-                {showMoreOptions
-                  && (
-                    <MenuPopup
-                      options={[{
-                        id: 1,
-                        name: 'Copy Link',
-                        action: this.onCopyLink,
-                      }, {
-                        id: 2,
-                        name: 'Delete Playlist',
-                        action: this.onDeletePlaylist,
-                      }]}
-                      toggleMenu={this.toggleOptionsMenu}
-                    />
-                  )
-                }
-              </SC.PlaylistOptions>
-            </SC.PlaylistAdditional>
-            {editPlaylist
-              ? (
-                <SC.PlaylistNameInput
-                  autoFocus
-                  value={playlistName}
-                  onChange={this.onPlaylistNameChange}
-                />
+            <SC.PlaylistInfoTop>
+              <SC.PlaylistAdditional>
+                <SC.Playlist>Playlist</SC.Playlist>
+                <SC.PlaylistOptions>
+                  {editPlaylist
+                    ? (
+                      <React.Fragment>
+                        <SC.SaveButton onClick={this.onPlaylistSave}>Save</SC.SaveButton>
+                        <SC.CancelButton onClick={this.onCancelEdit} />
+                      </React.Fragment>
+                    )
+                    : (
+                      <React.Fragment>
+                        <SC.EditButton onClick={this.onPlaylistEdit} />
+                        <SC.MoreButton onClick={this.toggleMenu} />
+                      </React.Fragment>
+                    )
+                  }
+                  {showMenu
+                    && (
+                      <PlaylistMenu
+                        onDeletePlaylist={this.onDeletePlaylist}
+                        onSetToRadiostation={this.onSetToRadiostation}
+                        onUnsetFromRadiostation={this.onUnsetFromRadiostation}
+                        isSetToRadiostation={isSetToRadiostation}
+                        toggleMenu={this.toggleMenu}
+                      />
+                    )
+                  }
+                </SC.PlaylistOptions>
+              </SC.PlaylistAdditional>
+              {editPlaylist
+                ? (
+                  <SC.PlaylistNameInput
+                    autoFocus
+                    value={playlistName}
+                    onChange={this.onPlaylistNameChange}
+                  />
+                )
+                : <SC.PlaylistName>{playlist.name}</SC.PlaylistName>
+              }
+            </SC.PlaylistInfoTop>
+            {isSetToRadiostation
+              && (
+                <SC.RadiostationContainer>
+                  <SC.RadiostationIcon
+                    onClick={this.onSetToRadiostation}
+                  />
+                  <SC.RadiostationText>At Radiostation</SC.RadiostationText>
+                </SC.RadiostationContainer>
               )
-              : <SC.PlaylistName>{playlist.name}</SC.PlaylistName>
             }
           </SC.PlaylistInfo>
         </SC.PlaylistInfoContainer>
-        <SC.TrackListContainer>
-          {tracks.map((track) => {
-            return (typeof track === 'object') && (
-              <Track
-                key={track._id}
-                track={track.name}
-                artist={track.artist}
-                cover={track.cover.url}
-                selected={currentTrack === track._id}
-                onSelectTrack={() => this.onSelectTrack(track._id)}
-              />
-            );
-          })}
-        </SC.TrackListContainer>
+        <TrackList
+          tracks={tracks}
+          currentTrackId={currentTrackId}
+          onSelectTrack={this.onSelectTrack}
+        />
       </SC.Page>
     );
   }
@@ -201,6 +218,8 @@ PlaylistPage.propTypes = {
   updatePlaylist: PropTypes.func.isRequired,
   deletePlaylist: PropTypes.func.isRequired,
   setCurrentTrack: PropTypes.func.isRequired,
+  setPlaylistToRadiostation: PropTypes.func.isRequired,
+  unsetRadiostation: PropTypes.func.isRequired,
   playlist: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -233,6 +252,8 @@ const mapDispatchToProps = {
   updatePlaylist: playlistActions.updatePlaylist,
   deletePlaylist: playlistActions.deletePlaylist,
   setCurrentTrack: currentTrackActions.setCurrentTrack,
+  setPlaylistToRadiostation: userActions.setPlaylistToRadiostation,
+  unsetRadiostation: userActions.unsetRadiostation,
 };
 
 export default withRouter(connect(

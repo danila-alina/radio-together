@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 // import { Play } from 'styled-icons/fa-solid';
 import {
-  SkipBack, SkipForward, Play, Repeat,
+  SkipBack, SkipForward, Play,
 } from 'styled-icons/feather';
 import { ArrowShuffle } from 'styled-icons/typicons';
 import * as styles from 'constants/styles';
@@ -124,35 +124,35 @@ export const PlayButtons = styled.div`
 
 export const PreviousTrack = styled(SkipBack)`
   width: 20px;
-  fill: ${styles.iconColor};
-  color: ${styles.iconHoverColor};
+  fill: ${styles.iconLightColor};
+  color: ${styles.iconColor};
   
   :hover {
     cursor: pointer;
-    fill: ${styles.iconHoverColor};
+    fill: ${styles.iconColor};
   }
 `;
 
 export const NextTrack = styled(SkipForward)`
   width: 20px;
-  fill: ${styles.iconColor};
-  color: ${styles.iconHoverColor};
+  fill: ${styles.iconLightColor};
+  color: ${styles.iconColor};
   
   :hover {
     cursor: pointer;
-    fill: ${styles.iconHoverColor};
+    fill: ${styles.iconColor};
   }
 `;
 
 export const PlayTrack = styled(Play)`
   width: 30px;
-  fill: ${styles.iconColor};
-  color: ${styles.iconHoverColor};
+  fill: ${styles.iconLightColor};
+  color: ${styles.iconColor};
   margin: 0 15px;
   
   :hover {
     cursor: pointer;
-    fill: ${styles.iconHoverColor};
+    fill: ${styles.iconColor};
   }
 `;
 

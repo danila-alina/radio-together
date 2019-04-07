@@ -6,7 +6,7 @@ export const Menu = styled.div`
   background-color: ${styles.backgroundColor};
   border: 1px solid ${styles.grayColor};
   border-radius: 10px;
-  width: 150px;
+  width: 200px;
   font-size: 14px;
   top: 5px;
   left: 25px;

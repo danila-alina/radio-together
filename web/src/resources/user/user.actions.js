@@ -7,3 +7,13 @@ export const signIn = () => {
 export const setAuth = () => {
   return dispatch => dispatch({ type: 'SET_AUTH' });
 };
+
+export const setPlaylistToRadiostation = (playlistId) => {
+  return dispatch => api.setPlaylistToRadiostation(playlistId)
+    .then(payload => dispatch({ type: 'SET_RADIOSTATION', payload }));
+};
+
+export const unsetRadiostation = () => {
+  return dispatch => api.unsetRadiostation()
+    .then(payload => dispatch({ type: 'UNSET_RADIOSTATION', payload }));
+};

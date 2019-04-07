@@ -1,5 +1,6 @@
 const initialState = {
   isAuthorised: false,
+  radiostation: {},
 };
 
 export default (state = initialState, action) => {
@@ -8,6 +9,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isAuthorised: true,
+      };
+    case 'SET_RADIOSTATION':
+      return {
+        ...state,
+        radiostation: action.payload.radiostation,
+      };
+    case 'UNSET_RADIOSTATION':
+      return {
+        ...state,
+        radiostation: action.payload.radiostation,
       };
     default:
       return state;
