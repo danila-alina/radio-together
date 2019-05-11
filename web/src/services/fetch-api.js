@@ -23,6 +23,11 @@ export default ({
     }
 
     if (response.status >= 400) {
+      if (response.status === 401) {
+        window.localStorage.clear();
+        window.location = '/';
+      }
+
       const isJSON = response.headers.get('Content-Type').includes('application/json');
 
       if (isJSON) {
@@ -62,9 +67,12 @@ export default ({
     ...getHeaders(),
   };
 
-  const get = (path, queryStringObject) => fetch(
-    buildUrl(path, queryStringObject), { headers: getJsonHeaders },
-  ).then(responseHandler);
+  const get = async (path, queryStringObject) => {
+    const response = await fetch(
+      buildUrl(path, queryStringObject), { headers: getJsonHeaders },
+    );
+    return responseHandler(response);
+  }
 
 
   const post = (path, queryStringObject, body) => fetch(
