@@ -52,24 +52,24 @@ export default ({
     };
   };
 
-  const getJsonHeaders = {
+  const getJsonHeaders = () => ({
     Accept: 'application/json',
     ...getHeaders(),
-  };
+  });
 
-  const postJsonHeaders = {
-    ...getJsonHeaders,
+  const postJsonHeaders = () => ({
+    ...getJsonHeaders(),
     'Content-Type': 'application/json',
     ...getHeaders(),
-  };
+  });
 
-  const postFileHeaders = {
+  const postFileHeaders = () => ({
     ...getHeaders(),
-  };
+  });
 
   const get = async (path, queryStringObject) => {
     const response = await fetch(
-      buildUrl(path, queryStringObject), { headers: getJsonHeaders },
+      buildUrl(path, queryStringObject), { headers: getJsonHeaders() },
     );
     return responseHandler(response);
   }
@@ -78,7 +78,7 @@ export default ({
   const post = (path, queryStringObject, body) => fetch(
     buildUrl(path, queryStringObject), {
       method: 'POST',
-      headers: postJsonHeaders,
+      headers: postJsonHeaders(),
       body: JSON.stringify(body),
     },
   ).then(responseHandler);
@@ -94,7 +94,7 @@ export default ({
   const put = (path, queryStringObject, body) => fetch(
     buildUrl(path, queryStringObject), {
       method: 'PUT',
-      headers: postJsonHeaders,
+      headers: postJsonHeaders(),
       body: JSON.stringify(body),
     },
   ).then(responseHandler);
@@ -102,7 +102,7 @@ export default ({
   const patch = (path, queryStringObject, body) => fetch(
     buildUrl(path, queryStringObject), {
       method: 'PATCH',
-      headers: postJsonHeaders,
+      headers: postJsonHeaders(),
       body: JSON.stringify(body),
     },
   ).then(responseHandler);
@@ -110,7 +110,7 @@ export default ({
   const del = (path, queryStringObject, body) => fetch(
     buildUrl(path, queryStringObject), {
       method: 'DELETE',
-      headers: postJsonHeaders,
+      headers: postJsonHeaders(),
       body: JSON.stringify(body),
     },
   ).then(responseHandler);
@@ -131,7 +131,7 @@ export default ({
   const postFile = (path, fileData) => {
     return fetch(buildUrl(path), {
       method: 'POST',
-      headers: postFileHeaders,
+      headers: postFileHeaders(),
       body: fileData,
     }).then(responseHandler);
   };
