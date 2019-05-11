@@ -14,6 +14,8 @@ module.exports = {
     historyApiFallback: true,
   },
 
+  devtool: 'source-map',
+
   context: path.resolve(__dirname, './'),
 
   module: {
