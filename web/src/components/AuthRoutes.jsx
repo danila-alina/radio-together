@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
-import SignInPage from 'components/SignInPage';
+import SignInPage from 'pages/SignInPage';
 
 class AuthRoutes extends React.Component {
   render() {

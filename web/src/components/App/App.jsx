@@ -8,19 +8,11 @@ import AuthRoutes from 'components/AuthRoutes';
 import Header from 'components/Header';
 import SideMenu from 'components/SideMenu';
 
-import * as userActions from 'resources/user/user.actions';
 import * as userSelectors from 'resources/user/user.selectors';
 
 import * as SC from './App.styled';
 
 class App extends React.Component {
-  componentDidMount() {
-    const { isAuthorised } = this.props;
-    if (isAuthorised) {
-      this.props.getUserInfo();
-    }
-  }
-
   render() {
     const { isAuthorised } = this.props;
 
@@ -41,16 +33,13 @@ class App extends React.Component {
 
 App.propTypes = {
   isAuthorised: PropTypes.bool.isRequired,
-  getUserInfo: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   isAuthorised: userSelectors.getAuth(state),
 });
 
-const mapDispatchToProps = {
-  getUserInfo: userActions.getUserInfo,
-};
+const mapDispatchToProps = {};
 
 export default withRouter(connect(
   mapStateToProps,
