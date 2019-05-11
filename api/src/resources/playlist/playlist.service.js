@@ -5,8 +5,9 @@ const playlistCollection = db.get('playlist', {
   castIds: false,
 });
 
-module.exports.getPlaylists = () => {
-  return playlistCollection.find({});
+module.exports.getPlaylists = async (playlistsIds) => {
+  const playlists = await playlistCollection.find({ _id: { $in: playlistsIds } });
+  return playlists;
 };
 
 module.exports.getPlaylistById = (playlistId) => {

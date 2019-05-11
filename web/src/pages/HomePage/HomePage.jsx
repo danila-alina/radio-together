@@ -1,18 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import RadiostationCard from 'components/RadiostationCard';
 import Track from 'components/Track';
 import Album from 'components/Album';
+
+import * as playlistActions from 'resources/playlist/playlist.actions';
+
 import {
-  Page, SectionTitle, Section, RadiostationsContainer,
-  TracksList, ListPortion, AlbumsList,
+  Page, SectionTitle, RadiostationsContainer,
+  TracksList, ListPortion, AlbumsList, RadiostationSection,
+  TracksSection, TracksSectionTitle, AlbumsSection,
 } from './HomePage.styled';
 
 class HomePage extends React.Component {
+  componentDidMount() {
+    this.props.getPlaylists();
+  }
+
   render() {
     return (
       <Page>
-        <Section>
+        <RadiostationSection>
           <SectionTitle>
             Radiostations popular right now
           </SectionTitle>
@@ -38,11 +48,11 @@ class HomePage extends React.Component {
               radiostationName="Sunrise"
             />
           </RadiostationsContainer>
-        </Section>
-        <Section>
-          <SectionTitle>
+        </RadiostationSection>
+        <TracksSection>
+          <TracksSectionTitle>
             Popular Tracks
-          </SectionTitle>
+          </TracksSectionTitle>
           <TracksList>
             <ListPortion>
               <Track
@@ -58,14 +68,14 @@ class HomePage extends React.Component {
               <Track
                 track="Shadow"
                 artist="Triplo Max"
-                cover="https://stopmusic.net/_ld/73/31931363.jpg"
+                cover="https://avatars.yandex.net/get-music-content/142001/48656386.a.6103179-1/m1000x1000"
               />
             </ListPortion>
             <ListPortion>
               <Track
                 track="Say My Name"
                 artist="David Guetta, Bebe Rexha, J. Balvin"
-                cover="https://stopmusic.net/_ld/63/69718723.jpg"
+                cover="https://muzonov.net/uploads/posts/2018-09/medium/1536750142_1.jpg"
               />
               <Track
                 track="Let You Love Me"
@@ -79,8 +89,8 @@ class HomePage extends React.Component {
               />
             </ListPortion>
           </TracksList>
-        </Section>
-        <Section>
+        </TracksSection>
+        <AlbumsSection>
           <SectionTitle>
             Last Released Albums
           </SectionTitle>
@@ -110,10 +120,21 @@ class HomePage extends React.Component {
               />
             </ListPortion>
           </AlbumsList>
-        </Section>
+        </AlbumsSection>
       </Page>
     );
   }
 }
 
-export default HomePage;
+HomePage.propTypes = {
+  getPlaylists: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = {
+  getPlaylists: playlistActions.getPlaylists,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(HomePage);

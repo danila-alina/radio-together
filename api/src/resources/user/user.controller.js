@@ -1,32 +1,67 @@
-const fetch = require('isomorphic-fetch');
+const securityUtil = require('security.util');
+const authService = require('services/auth.service');
 const playlistService = require('resources/playlist/playlist.service');
 const trackService = require('resources/track/track.service');
 const userService = require('./user.service');
 
-module.exports.signIn = async function signIn(ctx) {
-  fetch('http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=ffd1d95d6ca512c851d7af98908cdcb4&format=json')
-    .then((result) => {
-      return result.json();
-    })
-    .then((result) => {
-      console.log(result.tracks.track[0]);
-    });
+module.exports.signIn = async (ctx) => {
+  const { musicUserToken, userData } = ctx.request.body;
+  const { login, password } = userData;
+
+  const user = await userService.getUserByLogin(login);
+  if (!user) {
+    ctx.throw(401);
+  }
+
+  const verified = await securityUtil.verifyHash(password, user.passwordHash);
+  if (!verified) {
+    ctx.throw(401);
+  }
+
+  await userService.updateUser(user._id, { musicUserToken });
+  const token = authService.generateToken(user._id);
   ctx.body = {
-    token: 'alina',
+    token,
+  };
+};
+
+module.exports.signUp = async (ctx) => {
+  const { musicUserToken, userData } = ctx.request.body;
+  const {
+    login,
+    firstName,
+    lastName,
+    password,
+  } = userData;
+
+  const hash = await securityUtil.getHash(password);
+
+  const data = {
+    login,
+    firstName,
+    lastName,
+    musicUserToken,
+    passwordHash: hash,
+  };
+
+  const user = await userService.createUser(data);
+  const token = authService.generateToken(user._id);
+  ctx.body = {
+    token,
   };
 };
 
 module.exports.getUserInfo = async (ctx) => {
-  const userId = '5ca92ad73257a82200bb0f84';
-  const user = await userService.getUserInfo(userId);
+  const { userId } = ctx.state;
+  const user = await userService.getUserById(userId);
   ctx.body = {
     user,
   };
 };
 
 module.exports.setPlaylistToRadiostation = async (ctx) => {
+  const { userId } = ctx.state;
   const { playlistId } = ctx.request.body;
-  const userId = '5ca92ad73257a82200bb0f84';
   const user = await userService.setPlaylistToRadiostation(userId, playlistId);
   ctx.body = {
     radiostation: user.radiostation,
@@ -34,7 +69,7 @@ module.exports.setPlaylistToRadiostation = async (ctx) => {
 };
 
 module.exports.unsetRadiostation = async (ctx) => {
-  const userId = '5ca92ad73257a82200bb0f84';
+  const { userId } = ctx.state;
   const user = await userService.unsetRadiostation(userId);
   ctx.body = {
     radiostation: user.radiostation,
@@ -42,7 +77,7 @@ module.exports.unsetRadiostation = async (ctx) => {
 };
 
 module.exports.getRadiostation = async (ctx) => {
-  const userId = '5ca92ad73257a82200bb0f84';
+  const { userId } = ctx.state;
   const user = await userService.getUserById(userId);
   const { radiostation } = user;
 

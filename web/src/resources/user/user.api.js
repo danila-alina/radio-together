@@ -6,9 +6,20 @@ const baseApi = fetchApi({
   defaultQueryStringObject: {},
 });
 
-export function signIn() {
+export function signIn(musicUserToken, data) {
   return baseApi
-    .get('user/sign-in');
+    .post('user/sign-in', null, {
+      musicUserToken,
+      userData: data,
+    });
+}
+
+export function signUp(musicUserToken, data) {
+  return baseApi
+    .post('user/sign-up', null, {
+      musicUserToken,
+      userData: data,
+    });
 }
 
 export function getUserInfo() {

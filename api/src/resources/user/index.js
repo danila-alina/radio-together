@@ -1,10 +1,17 @@
-const router = require('koa-router')();
+const createRouter = require('koa-router');
 const controller = require('./user.controller');
 
-router.get('/', controller.getUserInfo);
-router.get('/sign-in', controller.signIn);
-router.get('/radiostation', controller.getRadiostation);
-router.post('/set-radiostation', controller.setPlaylistToRadiostation);
-router.post('/unset-radiostation', controller.unsetRadiostation);
+const publicRouter = createRouter();
+publicRouter.post('/sign-in', controller.signIn);
+publicRouter.post('/sign-up', controller.signUp);
 
-module.exports = router.routes();
+const privateRouter = createRouter();
+privateRouter.get('/', controller.getUserInfo);
+privateRouter.get('/radiostation', controller.getRadiostation);
+privateRouter.post('/set-radiostation', controller.setPlaylistToRadiostation);
+privateRouter.post('/unset-radiostation', controller.unsetRadiostation);
+
+module.exports = {
+  private: privateRouter.routes(),
+  public: publicRouter.routes(),
+};

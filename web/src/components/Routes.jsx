@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import HomePage from 'components/HomePage';
-import MyAccountPage from 'components/MyAccountPage';
-import MyMusicPage from 'components/MyMusicPage';
-import RecommendationsPage from 'components/RecommendationsPage';
-import PlaylistPage from 'components/PlaylistPage';
+import HomePage from 'pages/HomePage';
+import MyAccountPage from 'pages/MyAccountPage';
+import MyMusicPage from 'pages/MyMusicPage';
+import RecommendationsPage from 'pages/RecommendationsPage';
+import PlaylistPage from 'pages/PlaylistPage';
 
 class Routes extends React.Component {
   render() {

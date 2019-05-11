@@ -15,7 +15,10 @@ import * as SC from './App.styled';
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.getUserInfo();
+    const { isAuthorised } = this.props;
+    if (isAuthorised) {
+      this.props.getUserInfo();
+    }
   }
 
   render() {

@@ -15,5 +15,6 @@ module.exports = {
   rules: {
     'import/no-unresolved': 0,
     'arrow-body-style': 0,
+    'no-underscore-dangle': 0,
   },
 };

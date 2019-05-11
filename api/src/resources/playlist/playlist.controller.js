@@ -1,10 +1,16 @@
 const config = require('config/config');
 const trackService = require('resources/track/track.service');
+const userService = require('resources/user/user.service');
 const playlistService = require('./playlist.service');
 
 module.exports.getPlaylists = async (ctx) => {
-  const playlists = await playlistService.getPlaylists();
-  ctx.body = { playlists };
+  const { userId } = ctx.state;
+  const user = await userService.getUserById(userId);
+  const playlistsIds = user.playlists;
+  const playlists = await playlistService.getPlaylists(playlistsIds);
+  ctx.body = {
+    playlists,
+  };
 };
 
 module.exports.getPlaylistById = async (ctx) => {
@@ -23,8 +29,11 @@ module.exports.getPlaylistById = async (ctx) => {
 };
 
 module.exports.addPlaylist = async (ctx) => {
+  const { userId } = ctx.state;
   const playlist = { name: 'New Playlist' };
   const newPlaylist = await playlistService.addPlaylist(playlist);
+  const playlistId = newPlaylist._id;
+  await userService.addPlaylist(userId, playlistId);
   ctx.body = { newPlaylist };
 };
 
@@ -53,8 +62,10 @@ module.exports.updatePlaylist = async (ctx) => {
 };
 
 module.exports.deletePlaylist = async (ctx) => {
+  const { userId } = ctx.state;
   const { playlistId } = ctx.params;
   await playlistService.deletePlaylist(playlistId);
+  await userService.deletePlaylist(userId, playlistId);
   ctx.body = {
     playlistId,
   };

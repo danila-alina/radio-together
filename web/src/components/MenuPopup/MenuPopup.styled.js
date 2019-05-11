@@ -8,8 +8,9 @@ export const Menu = styled.div`
   border-radius: 10px;
   width: 200px;
   font-size: 14px;
-  top: 5px;
-  left: 25px;
+  top: ${props => props.top}px;
+  left: ${props => props.left}px;
+  z-index: 2;
 `;
 
 export const Option = styled.div`

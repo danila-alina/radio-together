@@ -38,19 +38,28 @@ export default ({
       .then(obj => obj);
   };
 
+  const getHeaders = () => {
+    const token = window.localStorage.getItem('token');
+
+    return {
+      ...headers,
+      Authorization: `Bearer ${token}`,
+    };
+  };
+
   const getJsonHeaders = {
     Accept: 'application/json',
-    ...headers,
+    ...getHeaders(),
   };
 
   const postJsonHeaders = {
     ...getJsonHeaders,
     'Content-Type': 'application/json',
-    ...headers,
+    ...getHeaders(),
   };
 
   const postFileHeaders = {
-    ...headers,
+    ...getHeaders(),
   };
 
   const get = (path, queryStringObject) => fetch(

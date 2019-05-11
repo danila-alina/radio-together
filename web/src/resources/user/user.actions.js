@@ -1,7 +1,11 @@
 import * as api from './user.api';
 
-export const signIn = () => {
-  return () => api.signIn();
+export const signIn = (musicUserToken, data) => {
+  return () => api.signIn(musicUserToken, data);
+};
+
+export const signUp = (musicUserToken, data) => {
+  return () => api.signUp(musicUserToken, data);
 };
 
 export const setAuth = () => {
