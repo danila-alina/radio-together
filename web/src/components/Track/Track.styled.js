@@ -53,10 +53,15 @@ export const Cover = styled.img`
 `;
 
 export const TrackInfo = styled.div`
-  margin-left: 15px;
+  padding-left: 15px;
+  flex-grow: 1;
+  
+  overflow: hidden;
 `;
 
 export const TrackName = styled.div`
+  max-width: 80%;
+
   font-weight: ${styles.fontMedium};
   white-space: nowrap;
   overflow: hidden;

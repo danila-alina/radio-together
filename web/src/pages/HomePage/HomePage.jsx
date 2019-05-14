@@ -56,7 +56,7 @@ class HomePage extends React.Component {
           <TracksList>
             <ListPortion>
               <Track
-                track="In My Mind"
+                track="In My Mind In My Head In My Mind In My Head"
                 artist="Dynoro, Gigi D'Agostino"
                 cover="http://www.europaplus.ru/upload/thumb/performer_308x308/001/024/02383/5ac62e20f1805_Dynoro_feat_Gigi_DAgostino_-_In_My_Mind_800.jpg"
               />
