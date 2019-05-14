@@ -3,30 +3,30 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import RadiostationCard from 'components/RadiostationCard';
-import Track from 'components/Track';
 import Album from 'components/Album';
 
 import * as playlistActions from 'resources/playlist/playlist.actions';
+import * as trackSelectors from 'resources/track/track.selectors';
+import * as trackActions from 'resources/track/track.actions';
+import TracksList from './components/TracksList';
 
-import {
-  Page, SectionTitle, RadiostationsContainer,
-  TracksList, ListPortion, AlbumsList, RadiostationSection,
-  TracksSection, TracksSectionTitle, AlbumsSection,
-} from './HomePage.styled';
+import * as SC from './HomePage.styled';
 
 class HomePage extends React.Component {
   componentDidMount() {
     this.props.getPlaylists();
+    this.props.getPopularTracks();
   }
 
   render() {
+    const { popularTracks } = this.props;
     return (
-      <Page>
-        <RadiostationSection>
-          <SectionTitle>
+      <SC.Page>
+        <SC.RadiostationSection>
+          <SC.SectionTitle>
             Radiostations popular right now
-          </SectionTitle>
-          <RadiostationsContainer>
+          </SC.SectionTitle>
+          <SC.RadiostationsContainer>
             <RadiostationCard
               colors={{ top: '#A67BC1', bottom: '#EAA8DF' }}
               userName="Dan Krachkouski"
@@ -47,55 +47,20 @@ class HomePage extends React.Component {
               userName="Allen Parks"
               radiostationName="Sunrise"
             />
-          </RadiostationsContainer>
-        </RadiostationSection>
-        <TracksSection>
-          <TracksSectionTitle>
+          </SC.RadiostationsContainer>
+        </SC.RadiostationSection>
+        <SC.TracksSection>
+          <SC.TracksSectionTitle>
             Popular Tracks
-          </TracksSectionTitle>
-          <TracksList>
-            <ListPortion>
-              <Track
-                track="In My Mind In My Head In My Mind In My Head"
-                artist="Dynoro, Gigi D'Agostino"
-                cover="http://www.europaplus.ru/upload/thumb/performer_308x308/001/024/02383/5ac62e20f1805_Dynoro_feat_Gigi_DAgostino_-_In_My_Mind_800.jpg"
-              />
-              <Track
-                track="Natural"
-                artist="Imagine Dragons"
-                cover="https://avatars.yandex.net/get-music-content/117546/b5c6945b.a.6017186-1/m1000x1000"
-              />
-              <Track
-                track="Shadow"
-                artist="Triplo Max"
-                cover="https://avatars.yandex.net/get-music-content/142001/48656386.a.6103179-1/m1000x1000"
-              />
-            </ListPortion>
-            <ListPortion>
-              <Track
-                track="Say My Name"
-                artist="David Guetta, Bebe Rexha, J. Balvin"
-                cover="https://muzonov.net/uploads/posts/2018-09/medium/1536750142_1.jpg"
-              />
-              <Track
-                track="Let You Love Me"
-                artist="Rita Ora"
-                cover="http://eurohittop40.ru/images/discs/1186814/1186814.jpg"
-              />
-              <Track
-                track="Baby"
-                artist="Clean Bandit, Luis Fonsi, Marina"
-                cover="https://www.letrasdemusiquita.com/wp-content/uploads/2018/11/e8f2b3ac3a4.1000x1000x1.jpg"
-              />
-            </ListPortion>
-          </TracksList>
-        </TracksSection>
-        <AlbumsSection>
-          <SectionTitle>
+          </SC.TracksSectionTitle>
+          <TracksList tracks={popularTracks.slice(0, 6)} />
+        </SC.TracksSection>
+        <SC.AlbumsSection>
+          <SC.SectionTitle>
             Last Released Albums
-          </SectionTitle>
-          <AlbumsList>
-            <ListPortion>
+          </SC.SectionTitle>
+          <SC.AlbumsList>
+            <SC.ListPortion>
               <Album
                 album="VIDA"
                 artist="Luis Fonsi"
@@ -106,8 +71,8 @@ class HomePage extends React.Component {
                 artist="MATRANG"
                 cover="https://the-flow.ru/uploads/images/catalog/element/5c536e3e84305.jpg"
               />
-            </ListPortion>
-            <ListPortion>
+            </SC.ListPortion>
+            <SC.ListPortion>
               <Album
                 album="Got To Keep On"
                 artist="The Chemical Brothers"
@@ -118,23 +83,39 @@ class HomePage extends React.Component {
                 artist="Ian Brown"
                 cover="https://upload.wikimedia.org/wikipedia/en/thumb/c/c4/IanBrown-Ripples.jpg/220px-IanBrown-Ripples.jpg"
               />
-            </ListPortion>
-          </AlbumsList>
-        </AlbumsSection>
-      </Page>
+            </SC.ListPortion>
+          </SC.AlbumsList>
+        </SC.AlbumsSection>
+      </SC.Page>
     );
   }
 }
 
 HomePage.propTypes = {
   getPlaylists: PropTypes.func.isRequired,
+  getPopularTracks: PropTypes.func.isRequired,
+  popularTracks: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    artist: PropTypes.string,
+    album: PropTypes.string,
+    composer: PropTypes.string,
+    genres: PropTypes.string,
+    duration: PropTypes.string,
+    appleMusicId: PropTypes.string,
+    cover: PropTypes.shape,
+  })).isRequired,
 };
+
+const mapStateToProps = state => ({
+  popularTracks: trackSelectors.getPopularTracks(state),
+});
 
 const mapDispatchToProps = {
   getPlaylists: playlistActions.getPlaylists,
+  getPopularTracks: trackActions.getPopularTracks,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(HomePage);

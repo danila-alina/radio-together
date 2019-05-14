@@ -35,3 +35,11 @@ export function deletePlaylist(playlistId) {
   return baseApi
     .del(`playlist/${playlistId}`);
 }
+
+export function addTrackToPlaylist(trackId, playlistId) {
+  return baseApi
+    .post('playlist/track', null, {
+      trackId,
+      playlistId,
+    });
+}

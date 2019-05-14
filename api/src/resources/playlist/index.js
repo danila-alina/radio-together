@@ -20,6 +20,7 @@ router.get('/', controller.getPlaylists);
 router.get('/:playlistId', controller.getPlaylistById);
 router.post('/add', controller.addPlaylist);
 router.post('/cover', upload.single('image'), controller.uploadPlaylistCover);
+router.post('/track', controller.addTrackToPlaylist);
 router.put('/:playlistId', controller.updatePlaylist);
 router.del('/:playlistId', controller.deletePlaylist);
 

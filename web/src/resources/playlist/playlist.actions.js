@@ -29,3 +29,8 @@ export const deletePlaylist = (playlistId) => {
   return dispatch => api.deletePlaylist(playlistId)
     .then(payload => dispatch({ type: 'DELETE_PLAYLIST', payload }));
 };
+
+export const addTrackToPlaylist = (trackId, playlistId) => {
+  return dispatch => api.addTrackToPlaylist(trackId, playlistId)
+    .then(payload => dispatch({ type: 'ADD_TRACK_TO_PLAYLIST', payload }));
+};

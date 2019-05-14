@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PlaylistMenu from 'components/PlaylistMenu';
+import PlaylistMenu from '../PlaylistMenu';
 import {
   TrackContiner, Cover, TrackInfo, TrackName, ArtistName,
   AddToPlaylistButton, AdditionalInfo,
@@ -20,18 +20,19 @@ class Track extends React.Component {
   }
 
   onAddToPlaylist = (playlistId) => {
-    
+    const { track, addTrackToPlaylist } = this.props;
+    addTrackToPlaylist(track._id, playlistId);
   }
 
   render() {
-    const { track, artist, cover } = this.props;
+    const { track } = this.props;
     const { showPlaylistMenu } = this.state;
     return (
-      <TrackContiner>
-        <Cover src={cover} />
+      <TrackContiner background={showPlaylistMenu}>
+        <Cover src={track.cover.url} />
         <TrackInfo>
-          <TrackName>{track}</TrackName>
-          <ArtistName>{artist}</ArtistName>
+          <TrackName>{track.name}</TrackName>
+          <ArtistName>{track.artist}</ArtistName>
         </TrackInfo>
         <AdditionalInfo>
           <AddToPlaylistButton
@@ -52,13 +53,20 @@ class Track extends React.Component {
 }
 
 Track.propTypes = {
-  track: PropTypes.string.isRequired,
-  artist: PropTypes.string.isRequired,
-  cover: PropTypes.string,
+  addTrackToPlaylist: PropTypes.func.isRequired,
+  track: PropTypes.shape({
+    name: PropTypes.string,
+    artist: PropTypes.string,
+    album: PropTypes.string,
+    composer: PropTypes.string,
+    genres: PropTypes.string,
+    duration: PropTypes.string,
+    appleMusicId: PropTypes.string,
+    cover: PropTypes.shape,
+  }).isRequired,
 };
 
 Track.defaultProps = {
-  cover: '',
 };
 
 export default Track;

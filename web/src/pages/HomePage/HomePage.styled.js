@@ -29,11 +29,6 @@ export const RadiostationsContainer = styled.div`
   margin: 30px 0;
 `;
 
-export const TracksList = styled.div`
-  margin: 20px 0;
-  display: flex;
-`;
-
 export const ListPortion = styled.div`
   width: 40%;
 `;

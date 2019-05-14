@@ -30,6 +30,7 @@ export const TrackContiner = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  background-color: ${props => props.background && styles.backgroundLightSelectedColor};
   
   padding-top: 10px;
   padding-bottom: 10px;
@@ -50,27 +51,22 @@ export const Cover = styled.img`
   width: 60px;
   height: 60px;
   border-radius: 5px;
+  border: 1px solid ${styles.grayColor};
 `;
 
 export const TrackInfo = styled.div`
-  padding-left: 15px;
-  flex-grow: 1;
-  
-  overflow: hidden;
+  margin-left: 15px;
+  width: 100%;
 `;
 
-export const TrackName = styled.div`
-  max-width: 80%;
-
+export const TrackName = styled.p`
   font-weight: ${styles.fontMedium};
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-width: 65%;
 `;
 
 export const ArtistName = styled.div`
   margin-top: 10px;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 `;

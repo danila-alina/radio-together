@@ -1,11 +1,10 @@
 import React from 'react';
 
 import RadiostationCard from 'components/RadiostationCard';
-import Track from 'components/Track';
-import Album from 'components/Album';
+import Track from 'pages/HomePage/components/Track';
 import {
   Page, SectionTitle, Section, RadiostationsContainer,
-  TracksList, ListPortion, AlbumsList,
+  TracksList, ListPortion,
 } from './RecommendationsPage.styled';
 
 class RecommendationsPage extends React.Component {
