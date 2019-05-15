@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import PlaylistMenu from '../PlaylistMenu';
-import {
-  TrackContiner, Cover, TrackInfo, TrackName, ArtistName,
-  AddToPlaylistButton, AdditionalInfo,
-} from './Track.styled';
+import * as SC from './Track.styled';
 
 class Track extends React.Component {
   state = {
@@ -28,17 +25,24 @@ class Track extends React.Component {
     const { track } = this.props;
     const { showPlaylistMenu } = this.state;
     return (
-      <TrackContiner background={showPlaylistMenu}>
-        <Cover src={track.cover.url} />
-        <TrackInfo>
-          <TrackName>{track.name}</TrackName>
-          <ArtistName>{track.artist}</ArtistName>
-        </TrackInfo>
-        <AdditionalInfo>
-          <AddToPlaylistButton
+      <SC.TrackContiner background={showPlaylistMenu}>
+        <SC.Cover src={track.cover.url} />
+        <SC.TrackInfo>
+          <SC.TrackName>{track.name}</SC.TrackName>
+          <SC.ArtistName>{track.artist}</SC.ArtistName>
+        </SC.TrackInfo>
+        <SC.AdditionalInfo>
+          <SC.TrackRating>
+            <SC.RatingStar />
+            <SC.RatingStar />
+            <SC.RatingStar />
+            <SC.RatingStar />
+            <SC.RatingStar />
+          </SC.TrackRating>
+          <SC.AddToPlaylistButton
             onClick={this.onPlaylistMenuClick}
           />
-        </AdditionalInfo>
+        </SC.AdditionalInfo>
         {showPlaylistMenu
           && (
             <PlaylistMenu
@@ -47,7 +51,7 @@ class Track extends React.Component {
             />
           )
         }
-      </TrackContiner>
+      </SC.TrackContiner>
     );
   }
 }

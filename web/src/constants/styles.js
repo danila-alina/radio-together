@@ -11,6 +11,7 @@ export const iconLightColor = '#CFCFCF';
 export const iconHoverColor = '#808080';
 
 export const selectedColor = '#A67BC1';
+export const brightPink = '#EF629F';
 
 export const fontColor = '#474747';
 export const fontSecondaryColor = '#B8B8B8';

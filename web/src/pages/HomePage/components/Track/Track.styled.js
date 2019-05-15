@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Plus } from 'styled-icons/feather';
+import { Plus, Star } from 'styled-icons/feather';
 import * as styles from 'constants/styles';
 
 export const AddToPlaylistButton = styled(Plus)`
@@ -24,6 +24,33 @@ export const AdditionalInfo = styled.div`
   position: absolute;
   right: 10px;
   top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const TrackRating = styled.div`
+  display: none;
+  margin-right: 5px;
+`;
+
+export const RatingStar = styled(Star)`
+  width: 15px;
+  fill: transparent;
+  color: ${styles.iconHoverColor};
+  
+  :hover {
+    fill: ${styles.selectedColor};
+    color: ${styles.selectedColor};
+  }
+`;
+
+export const TrackName = styled.p`
+  font-weight: ${styles.fontMedium};
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const TrackContiner = styled.div`
@@ -45,6 +72,14 @@ export const TrackContiner = styled.div`
   :hover ${AddToPlaylistButton} {
     display: block;
   }
+  
+  :hover ${TrackRating} {
+    display: block;
+  }
+  
+  :hover ${TrackName} {
+    max-width: 60%;
+  }
 `;
 
 export const Cover = styled.img`
@@ -56,12 +91,8 @@ export const Cover = styled.img`
 
 export const TrackInfo = styled.div`
   margin-left: 15px;
-  width: 100%;
-`;
-
-export const TrackName = styled.p`
-  font-weight: ${styles.fontMedium};
-  max-width: 65%;
+  flex: 1 0 0;
+  overflow: hidden;
 `;
 
 export const ArtistName = styled.div`
