@@ -24,3 +24,8 @@ module.exports.getPopularTracks = async (ctx) => {
     tracks,
   };
 };
+
+module.exports.rateTrack = async (ctx) => {
+  console.log('----------------')
+  console.log(ctx.params)
+};

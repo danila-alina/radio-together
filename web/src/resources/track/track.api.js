@@ -10,3 +10,8 @@ export function getPopularTracks() {
   return baseApi
     .get('track/popular');
 }
+
+export function rateTrack(trackId, trackRate) {
+  return baseApi
+    .post(`track/${trackId}/rate`, null, { trackRate });
+}

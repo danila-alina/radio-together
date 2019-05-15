@@ -36,13 +36,8 @@ export const TrackRating = styled.div`
 
 export const RatingStar = styled(Star)`
   width: 15px;
-  fill: transparent;
-  color: ${styles.iconHoverColor};
-  
-  :hover {
-    fill: ${styles.selectedColor};
-    color: ${styles.selectedColor};
-  }
+  fill: ${props => props.highlighted ? styles.selectedColor : 'transparent'};
+  color: ${props => props.highlighted ? styles.selectedColor : styles.iconHoverColor};
 `;
 
 export const TrackName = styled.p`
