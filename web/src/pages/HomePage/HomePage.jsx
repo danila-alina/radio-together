@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import RadiostationCard from 'components/RadiostationCard';
 import Album from 'components/Album';
+import Loader from 'components/Loader';
 
 import * as playlistActions from 'resources/playlist/playlist.actions';
 import * as trackSelectors from 'resources/track/track.selectors';
@@ -13,13 +14,28 @@ import TracksList from './components/TracksList';
 import * as SC from './HomePage.styled';
 
 class HomePage extends React.Component {
+  state = {
+    isLoading: true,
+  }
+
   componentDidMount() {
     this.props.getPlaylists();
-    this.props.getPopularTracks();
+    this.props.getPopularTracks()
+      .then(() => {
+        this.setState({
+          isLoading: false,
+        });
+      });
   }
 
   render() {
+    const { isLoading } = this.state;
     const { popularTracks } = this.props;
+
+    if (isLoading) {
+      return <Loader />;
+    }
+
     return (
       <SC.Page>
         <SC.RadiostationSection>
@@ -99,8 +115,8 @@ HomePage.propTypes = {
     artist: PropTypes.string,
     album: PropTypes.string,
     composer: PropTypes.string,
-    genres: PropTypes.string,
-    duration: PropTypes.string,
+    genres: PropTypes.array,
+    duration: PropTypes.number,
     appleMusicId: PropTypes.string,
     cover: PropTypes.shape,
   })).isRequired,

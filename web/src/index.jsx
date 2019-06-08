@@ -7,6 +7,7 @@ import App from './components/App';
 import * as userActions from './resources/user/user.actions';
 
 import store from './resources/store';
+import 'appleConfiguration';
 
 const token = window.localStorage.getItem('token');
 if (token) {

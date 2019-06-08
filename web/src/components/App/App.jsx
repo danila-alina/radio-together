@@ -9,12 +9,17 @@ import Header from 'components/Header';
 import SideMenu from 'components/SideMenu';
 
 import * as userSelectors from 'resources/user/user.selectors';
+import * as currentTrackSelectors from 'resources/currentTrack/currentTrack.selectors';
 
 import * as SC from './App.styled';
 
 class App extends React.Component {
   render() {
-    const { isAuthorised } = this.props;
+    const { isAuthorised, isConfiguredInstance } = this.props;
+
+    if (!isConfiguredInstance) {
+      return null;
+    }
 
     if (isAuthorised) {
       return (
@@ -33,10 +38,16 @@ class App extends React.Component {
 
 App.propTypes = {
   isAuthorised: PropTypes.bool.isRequired,
+  isConfiguredInstance: PropTypes.bool,
+};
+
+App.defaultProps = {
+  isConfiguredInstance: false,
 };
 
 const mapStateToProps = state => ({
   isAuthorised: userSelectors.getAuth(state),
+  isConfiguredInstance: currentTrackSelectors.isInstanceConfigured(state),
 });
 
 const mapDispatchToProps = {};

@@ -3,11 +3,12 @@ const trackService = require('resources/track/track.service');
 
 module.exports.getPopularTracks = async (ctx) => {
   const { results } = await appleService.getPopularTracks();
-  const tracks = results.songs.find(res => res.chart === 'most-played').data.map((track) => {
+  const appleTracks = results.songs.find(res => res.chart === 'most-played').data.map((track) => {
     const { artwork } = track.attributes;
     return {
       name: track.attributes.name,
       artist: track.attributes.artistName,
+      url: track.attributes.url,
       album: track.attributes.albumName,
       composer: track.attributes.composerName || '',
       genres: track.attributes.genreNames,
@@ -20,12 +21,18 @@ module.exports.getPopularTracks = async (ctx) => {
     };
   });
 
+  const tracks = await trackService.addPopularTracks(appleTracks);
+
   ctx.body = {
     tracks,
   };
 };
 
 module.exports.rateTrack = async (ctx) => {
-  console.log('----------------')
-  console.log(ctx.params)
+  const { userId } = ctx.state;
+  const { trackId } = ctx.params;
+
+  await trackService.rateTrack(userId, trackId);
+
+  ctx.body = {};
 };

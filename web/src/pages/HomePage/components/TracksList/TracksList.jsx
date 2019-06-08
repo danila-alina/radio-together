@@ -20,6 +20,7 @@ class TracksList extends React.Component {
         <SC.ListPortion>
           {tracks.slice(0, 3).map(track => (
             <Track
+              key={track._id}
               track={track}
               addTrackToPlaylist={this.onAddTrackToPlaylist}
             />
@@ -28,6 +29,7 @@ class TracksList extends React.Component {
         <SC.ListPortion>
           {tracks.slice(-3).map(track => (
             <Track
+              key={track._id}
               track={track}
               addTrackToPlaylist={this.onAddTrackToPlaylist}
             />
@@ -45,8 +47,8 @@ TracksList.propTypes = {
     artist: PropTypes.string,
     album: PropTypes.string,
     composer: PropTypes.string,
-    genres: PropTypes.string,
-    duration: PropTypes.string,
+    genres: PropTypes.array,
+    duration: PropTypes.number,
     appleMusicId: PropTypes.string,
     cover: PropTypes.shape,
   })),

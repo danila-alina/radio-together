@@ -65,3 +65,6 @@ exports.deletePlaylist = (userId, playlistId) => {
     { $pull: { playlists: playlistId } },
   );
 };
+
+exports.rateTrack = async (userId, trackId) => {
+};

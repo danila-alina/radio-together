@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { Plus, Star } from 'styled-icons/feather';
+import {
+  Plus,
+  Star,
+  Play,
+  Pause,
+} from 'styled-icons/feather';
 import * as styles from 'constants/styles';
 
 export const AddToPlaylistButton = styled(Plus)`
@@ -36,8 +41,8 @@ export const TrackRating = styled.div`
 
 export const RatingStar = styled(Star)`
   width: 15px;
-  fill: ${props => props.highlighted ? styles.selectedColor : 'transparent'};
-  color: ${props => props.highlighted ? styles.selectedColor : styles.iconHoverColor};
+  fill: ${props => (props.highlighted ? styles.selectedColor : 'transparent')};
+  color: ${props => (props.highlighted ? styles.selectedColor : styles.iconHoverColor)};
 `;
 
 export const TrackName = styled.p`
@@ -46,6 +51,33 @@ export const TrackName = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+`;
+
+export const PlayButton = styled(Play)`
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: ${styles.whiteColor};
+  opacity: 0.6;
+  width: 40px;
+`;
+
+export const PauseButton = styled(Pause)`
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: ${styles.whiteColor};
+  opacity: 0.6;
+  width: 40px;
+`;
+
+export const Cover = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  border: 1px solid ${styles.backgroundGrayColor};
 `;
 
 export const TrackContiner = styled.div`
@@ -75,13 +107,22 @@ export const TrackContiner = styled.div`
   :hover ${TrackName} {
     max-width: 60%;
   }
+  
+  :hover ${PlayButton} {
+    display: block;
+  }
+  
+  :hover ${PauseButton} {
+    display: block;
+  }
+  
+  :hover ${Cover} {
+    filter: brightness(80%);
+  }
 `;
 
-export const Cover = styled.img`
-  width: 60px;
-  height: 60px;
-  border-radius: 5px;
-  border: 1px solid ${styles.grayColor};
+export const CoverContainer = styled.div`
+  position: relative;
 `;
 
 export const TrackInfo = styled.div`

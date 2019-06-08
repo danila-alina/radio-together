@@ -8,7 +8,7 @@ const defaultHeaders = {
 };
 
 appleService.getPopularTracks = () => {
-  return fetch(`${config.appleUrl}/catalog/us/charts?types=songs`, {
+  return fetch(`${config.appleUrl}/catalog/by/charts?types=songs`, {
     headers: defaultHeaders,
   }).then(res => res.json());
 };

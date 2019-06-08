@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 // import { Play } from 'styled-icons/fa-solid';
 import {
-  SkipBack, SkipForward, Play,
+  SkipBack, SkipForward, Play, Pause,
 } from 'styled-icons/feather';
 import { ArrowShuffle } from 'styled-icons/typicons';
 import * as styles from 'constants/styles';
@@ -24,16 +24,8 @@ export const TrackInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-left: 20px;
-`;
-
-export const PlayButton = styled(Play)`
-  display: none;
-  position: absolute;
-  left: 30px;
-  top: 30px;
-  width: 20px;
-  color: ${styles.whiteColor};
-  opacity: 0.8;
+  overflow: hidden;
+  flex: 1 0 0;
 `;
 
 export const Cover = styled.div`
@@ -43,25 +35,22 @@ export const Cover = styled.div`
   height: 80px;
   border-radius: 10px;
   position: relative;
-  
-  :hover {
-    cursor: pointer;
-    filter: brightness(90%);
-  }
-  
-  :hover ${PlayButton} {
-    display: block;
-  }
 `;
 
 export const TrackName = styled.div`
   font-size: 16px;
   font-weight: ${styles.fontMedium};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const ArtistName = styled.div`
   font-size: 16px;
   margin-top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const ProgressInfo = styled.div`
@@ -145,6 +134,18 @@ export const NextTrack = styled(SkipForward)`
 `;
 
 export const PlayTrack = styled(Play)`
+  width: 30px;
+  fill: ${styles.iconLightColor};
+  color: ${styles.iconColor};
+  margin: 0 15px;
+  
+  :hover {
+    cursor: pointer;
+    fill: ${styles.iconColor};
+  }
+`;
+
+export const PauseTrack = styled(Pause)`
   width: 30px;
   fill: ${styles.iconLightColor};
   color: ${styles.iconColor};
