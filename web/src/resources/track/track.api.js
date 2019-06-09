@@ -15,3 +15,8 @@ export function rateTrack(trackId, trackRate) {
   return baseApi
     .post(`track/${trackId}/rate`, null, { trackRate });
 }
+
+export function searchTracks(searchValue) {
+  return baseApi
+    .get(`track/search/${searchValue}`);
+}

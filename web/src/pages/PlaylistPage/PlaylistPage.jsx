@@ -5,11 +5,11 @@ import { withRouter } from 'react-router-dom';
 
 import { getGradientColor } from 'services/getGradient';
 import * as playlistActions from 'resources/playlist/playlist.actions';
-import * as currentTrackActions from 'resources/currentTrack/currentTrack.actions';
 import * as userActions from 'resources/user/user.actions';
 import * as userSelectors from 'resources/user/user.selectors';
 import * as playlistSelectors from 'resources/playlist/playlist.selectors';
 
+import Loader from 'components/Loader';
 import TrackList from './components/TrackList';
 import PlaylistMenu from './components/PlaylistMenu';
 import * as SC from './PlaylistPage.styled';
@@ -21,22 +21,17 @@ class PlaylistPage extends React.Component {
     showMenu: false,
     isSetToRadiostation: false,
     playlistName: '',
+    isLoading: true,
   };
 
   componentDidMount() {
     const { playlistId } = this.props.match.params;
-    this.props.getPlaylistById(playlistId);
-  }
-
-  onSelectTrack = (trackId) => {
-    const { playlist } = this.props;
-    const track = playlist.tracks.find((item) => {
-      return item._id === trackId;
-    });
-    this.props.setCurrentTrack(track);
-    this.setState({
-      currentTrackId: trackId,
-    });
+    this.props.getPlaylistById(playlistId)
+      .then(() => {
+        this.setState({
+          isLoading: false,
+        });
+      });
   }
 
   onUploadImage = (event) => {
@@ -123,8 +118,12 @@ class PlaylistPage extends React.Component {
   render() {
     const {
       currentTrackId, editPlaylist, playlistName,
-      showMenu, isSetToRadiostation,
+      showMenu, isSetToRadiostation, isLoading,
     } = this.state;
+    if (isLoading) {
+      return <Loader />;
+    }
+
     const { playlist, radiostation } = this.props;
     const { playlistId } = this.props.match.params;
     const tracks = playlist.tracks || [];
@@ -207,7 +206,6 @@ class PlaylistPage extends React.Component {
         <TrackList
           tracks={tracks}
           currentTrackId={currentTrackId}
-          onSelectTrack={this.onSelectTrack}
         />
       </SC.Page>
     );
@@ -219,7 +217,6 @@ PlaylistPage.propTypes = {
   uploadPlaylistCover: PropTypes.func.isRequired,
   updatePlaylist: PropTypes.func.isRequired,
   deletePlaylist: PropTypes.func.isRequired,
-  setCurrentTrack: PropTypes.func.isRequired,
   setPlaylistToRadiostation: PropTypes.func.isRequired,
   unsetRadiostation: PropTypes.func.isRequired,
   playlist: PropTypes.objectOf(PropTypes.oneOfType([
@@ -260,7 +257,6 @@ const mapDispatchToProps = {
   uploadPlaylistCover: playlistActions.uploadPlaylistCover,
   updatePlaylist: playlistActions.updatePlaylist,
   deletePlaylist: playlistActions.deletePlaylist,
-  setCurrentTrack: currentTrackActions.setCurrentTrack,
   setPlaylistToRadiostation: userActions.setPlaylistToRadiostation,
   unsetRadiostation: userActions.unsetRadiostation,
 };

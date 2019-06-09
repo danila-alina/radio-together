@@ -6,6 +6,7 @@ import MyAccountPage from 'pages/MyAccountPage';
 import MyMusicPage from 'pages/MyMusicPage';
 import RecommendationsPage from 'pages/RecommendationsPage';
 import PlaylistPage from 'pages/PlaylistPage';
+import SearchResultsPage from 'pages/SearchResultsPage';
 
 class Routes extends React.Component {
   render() {
@@ -16,6 +17,10 @@ class Routes extends React.Component {
         <Route path="/my-music" component={MyMusicPage} />
         <Route path="/recommendations" component={RecommendationsPage} />
         <Route path="/playlist/:playlistId" component={PlaylistPage} />
+        <Route
+          path="/search-tracks/:searchValue"
+          component={props => <SearchResultsPage key={props.match.url} {...props} />}
+        />
       </Switch>
     );
   }

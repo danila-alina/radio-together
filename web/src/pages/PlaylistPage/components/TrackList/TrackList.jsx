@@ -6,18 +6,14 @@ import * as SC from './TrackList.styled';
 
 class TrackList extends React.Component {
   render() {
-    const { tracks, currentTrackId } = this.props;
+    const { tracks } = this.props;
     return (
       <SC.TrackListContainer>
         {tracks.map((track) => {
           return (typeof track === 'object') && (
             <Track
               key={track._id}
-              track={track.name}
-              artist={track.artist}
-              cover={track.cover.url}
-              selected={currentTrackId === track._id}
-              onSelectTrack={() => this.props.onSelectTrack(track._id)}
+              track={track}
             />
           );
         })}
@@ -28,13 +24,10 @@ class TrackList extends React.Component {
 
 TrackList.propTypes = {
   tracks: PropTypes.arrayOf(PropTypes.object),
-  currentTrackId: PropTypes.string,
-  onSelectTrack: PropTypes.func.isRequired,
 };
 
 TrackList.defaultProps = {
   tracks: [],
-  currentTrackId: null,
 };
 
 export default TrackList;

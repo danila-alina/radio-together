@@ -72,10 +72,9 @@ module.exports.deletePlaylist = async (ctx) => {
 };
 
 module.exports.addTrackToPlaylist = async (ctx) => {
-  const { userId } = ctx.state;
   const { trackId, playlistId } = ctx.request.body;
-  console.log('--------------------');
-  console.log(trackId, playlistId);
+  const playlist = await playlistService.addTrackToPlaylist(playlistId, trackId);
   ctx.body = {
+    playlist,
   };
 };

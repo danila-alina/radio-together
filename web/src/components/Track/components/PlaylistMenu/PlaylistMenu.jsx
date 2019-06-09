@@ -1,24 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import onClickOutside from 'react-onclickoutside';
 
 import * as playlistSelectors from 'resources/playlist/playlist.selectors';
-import MenuPopup from 'components/MenuPopup';
+import * as SC from './PlaylistMenu.styled';
 
 class PlaylistMenu extends React.Component {
+  handleClickOutside = (event) => {
+    this.props.toggleMenu();
+  }
+
   render() {
     const { playlists } = this.props;
+    const renderOptions = playlists.map((playlist) => {
+      return (
+        <SC.Option key={playlist._id} onClick={() => this.props.onAddToPlaylist(playlist._id)}>
+          {playlist.name}
+        </SC.Option>
+      );
+    });
     return (
-      <MenuPopup
-        left={180}
-        top={5}
-        options={playlists.map(playlist => ({
-          id: playlist._id,
-          name: playlist.name,
-          action: () => this.props.onAddToPlaylist(playlist._id),
-        }))}
-        toggleMenu={this.props.toggleMenu}
-      />
+      <SC.Menu>
+        {renderOptions}
+      </SC.Menu>
     );
   }
 }
@@ -39,4 +44,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PlaylistMenu);
+)(onClickOutside(PlaylistMenu));

@@ -1,19 +1,19 @@
-export function getTrackInfo({ currentTrack }) {
+export const getTrackInfo = ({ currentTrack }) => {
   return currentTrack.track;
-}
+};
 
-export function getPlayedTime({ currentTrack }) {
+export const getPlayedTime = ({ currentTrack }) => {
   return currentTrack.progress;
-}
+};
 
-export function getStatus({ currentTrack }) {
+export const getStatus = ({ currentTrack }) => {
   return currentTrack.status;
-}
+};
 
-export function getTrackId({ currentTrack }) {
+export const getTrackId = ({ currentTrack }) => {
   return currentTrack.track._id;
-}
+};
 
-export function isInstanceConfigured({ currentTrack }) {
+export const isInstanceConfigured = ({ currentTrack }) => {
   return currentTrack.isConfiguredInstance;
-}
+};

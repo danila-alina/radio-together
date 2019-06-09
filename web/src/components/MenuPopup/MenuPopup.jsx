@@ -10,7 +10,9 @@ class MenuPopup extends React.Component {
   }
 
   render() {
-    const { options, top, left } = this.props;
+    const {
+      options, top, left, right,
+    } = this.props;
     const renderOptions = options.map((option) => {
       return (
         <SC.Option key={option.id} onClick={option.action}>
@@ -19,7 +21,7 @@ class MenuPopup extends React.Component {
       );
     });
     return (
-      <SC.Menu top={top} left={left}>
+      <SC.Menu top={top} left={left} right={right}>
         {renderOptions}
       </SC.Menu>
     );
@@ -30,11 +32,13 @@ MenuPopup.propTypes = {
   toggleMenu: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
   left: PropTypes.number,
+  right: PropTypes.number,
   top: PropTypes.number,
 };
 
 MenuPopup.defaultProps = {
   left: 25,
+  right: 0,
   top: 5,
 };
 

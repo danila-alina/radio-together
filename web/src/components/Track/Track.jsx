@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 import * as currentTrackSelectors from 'resources/currentTrack/currentTrack.selectors';
 import * as trackActions from 'resources/track/track.actions';
 import * as currentTrackActions from 'resources/currentTrack/currentTrack.actions';
-import PlaylistMenu from '../PlaylistMenu';
+import * as playlistActions from 'resources/playlist/playlist.actions';
+
+import PlaylistMenu from './components/PlaylistMenu';
+
 import * as SC from './Track.styled';
 
 const stars = [1, 2, 3, 4, 5];
@@ -26,7 +29,10 @@ class Track extends React.Component {
 
   onAddToPlaylist = (playlistId) => {
     const { track, addTrackToPlaylist } = this.props;
-    addTrackToPlaylist(track._id, playlistId);
+    addTrackToPlaylist(track._id, playlistId)
+      .then(() => {
+        this.onPlaylistMenuClick();
+      });
   }
 
   onRatingStarClick = (trackRating) => {
@@ -154,6 +160,7 @@ const mapDispatchToProps = {
   setTrack: currentTrackActions.setTrack,
   playTrack: currentTrackActions.playTrack,
   pauseTrack: currentTrackActions.pauseTrack,
+  addTrackToPlaylist: playlistActions.addTrackToPlaylist,
 };
 
 export default connect(

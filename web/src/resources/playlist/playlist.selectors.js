@@ -1,10 +1,10 @@
-export function getPlaylists({ playlist }) {
+export const getPlaylists = ({ playlist }) => {
   return playlist.playlists;
-}
+};
 
-export function getCurrentPlaylist(playlistId, { playlist }) {
+export const getCurrentPlaylist = (playlistId, { playlist }) => {
   const currentPlaylist = playlist.playlists.find((item) => {
     return item._id === playlistId;
   });
   return currentPlaylist;
-}
+};

@@ -31,3 +31,10 @@ module.exports.updatePlaylist = (playlistId, playlist) => {
 module.exports.deletePlaylist = (playlistId) => {
   playlistCollection.remove({ _id: playlistId });
 };
+
+module.exports.addTrackToPlaylist = (playlistId, trackId) => {
+  return playlistCollection.findOneAndUpdate(
+    { _id: playlistId },
+    { $push: { tracks: trackId } },
+  );
+};

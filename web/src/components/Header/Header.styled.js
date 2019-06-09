@@ -12,6 +12,37 @@ export const StyledHeader = styled.div`
   align-items: center;
 `;
 
+export const SearchContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const SearchButtonContainer = styled.div`
+  display: none;
+`;
+
+export const SearchButton = styled(NavLink)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  height: 35px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 10px;
+  color: ${styles.whiteColor};
+  background: linear-gradient(
+    to bottom left,
+    #f1b9d2, #a67bc1 
+  );
+  font-size: 14px;
+  text-decoration: none;
+  
+  :hover {
+    cursor: pointer;
+  }
+`;
+
 export const Search = styled.input`
   height: 35px;
   width: 414px;
@@ -29,6 +60,10 @@ export const Search = styled.input`
   
   :focus {
     width: 450px;
+  }
+  
+  :not([value=""]) + ${SearchButtonContainer} {
+    display: block;
   }
 `;
 

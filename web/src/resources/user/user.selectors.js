@@ -1,11 +1,11 @@
-export function getAuth({ user }) {
+export const getAuth = ({ user }) => {
   return user.isAuthorised;
-}
+};
 
-export function getUserInfo({ user }) {
+export const getUserInfo = ({ user }) => {
   return user;
-}
+};
 
-export function getRadiostation({ user }) {
+export const getRadiostation = ({ user }) => {
   return user.radiostation;
-}
+};

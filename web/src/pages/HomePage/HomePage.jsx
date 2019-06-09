@@ -44,6 +44,7 @@ class HomePage extends React.Component {
           </SC.SectionTitle>
           <SC.RadiostationsContainer>
             <RadiostationCard
+              userId="5cfd7b992dc403b5ae62cdeb"
               colors={{ top: '#A67BC1', bottom: '#EAA8DF' }}
               userName="Dan Krachkouski"
               radiostationName="Kotik"
@@ -69,7 +70,7 @@ class HomePage extends React.Component {
           <SC.TracksSectionTitle>
             Popular Tracks
           </SC.TracksSectionTitle>
-          <TracksList tracks={popularTracks.slice(0, 6)} />
+          <TracksList tracks={popularTracks.slice(0, 8)} />
         </SC.TracksSection>
         <SC.AlbumsSection>
           <SC.SectionTitle>

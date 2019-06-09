@@ -1,7 +1,7 @@
 import React from 'react';
 
 import RadiostationCard from 'components/RadiostationCard';
-import Track from 'pages/HomePage/components/Track';
+import Track from 'components/Track';
 import {
   Page, SectionTitle, Section, RadiostationsContainer,
   TracksList, ListPortion,

@@ -1,6 +1,7 @@
 const initialState = {
   popularTracks: [],
   recommendedTracks: [],
+  searchTracks: [],
 };
 
 export default (state = initialState, action) => {
@@ -9,6 +10,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         popularTracks: action.payload.tracks,
+      };
+    case 'SEARCH_TRACKS':
+      return {
+        ...state,
+        searchTracks: action.payload.tracks,
       };
     default:
       return state;

@@ -10,7 +10,7 @@ module.exports.getTracksByIds = async (tracksIds) => {
   return tracks;
 };
 
-module.exports.addPopularTracks = async (tracks) => {
+module.exports.addNewTracks = async (tracks) => {
   const results = Promise.all(tracks.map(async (track) => {
     const result = await trackCollection.findOneAndUpdate({
       appleMusicId: track.appleMusicId,

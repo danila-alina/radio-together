@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import * as playlistActions from 'resources/playlist/playlist.actions';
 
-import Track from '../Track';
+import Track from 'components/Track';
 import * as SC from './TracksList.styled';
 
 class TracksList extends React.Component {
@@ -18,7 +18,7 @@ class TracksList extends React.Component {
     return (
       <SC.TracksListContainer>
         <SC.ListPortion>
-          {tracks.slice(0, 3).map(track => (
+          {tracks.slice(0, 4).map(track => (
             <Track
               key={track._id}
               track={track}
@@ -27,7 +27,7 @@ class TracksList extends React.Component {
           ))}
         </SC.ListPortion>
         <SC.ListPortion>
-          {tracks.slice(-3).map(track => (
+          {tracks.slice(-4).map(track => (
             <Track
               key={track._id}
               track={track}
