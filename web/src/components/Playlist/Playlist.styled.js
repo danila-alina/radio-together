@@ -20,7 +20,8 @@ export const CoverShadow = styled.div`
 `;
 
 export const Cover = styled.div`
-  background-size: 100% auto;
+  background-size: cover;
+  background-position: center;
   background-image: url(${props => props.cover});
   border-radius: 10px;
   position:absolute;

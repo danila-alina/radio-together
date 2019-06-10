@@ -50,7 +50,8 @@ export const PlaylistCover = styled.div`
 `;
 
 export const Cover = styled.div`
-  background-size: 100% auto;
+  background-size: cover;
+  background-position: center;
   background-image: url(${props => props.cover});
   width: 150px;
   height: 150px;

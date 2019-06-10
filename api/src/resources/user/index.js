@@ -8,6 +8,7 @@ publicRouter.post('/sign-up', controller.signUp);
 const privateRouter = createRouter();
 privateRouter.get('/', controller.getUserInfo);
 privateRouter.get('/radiostation', controller.getRadiostation);
+privateRouter.get('/:userId/radiostation', controller.getUserRadiostation);
 privateRouter.post('/set-radiostation', controller.setPlaylistToRadiostation);
 privateRouter.post('/unset-radiostation', controller.unsetRadiostation);
 

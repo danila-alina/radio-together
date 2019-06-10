@@ -31,3 +31,8 @@ export const getRadiostation = () => {
   return dispatch => api.getRadiostation()
     .then(payload => dispatch({ type: 'GET_RADIOSTATION', payload }));
 };
+
+export const getUserRadiostation = userId => async (dispatch) => {
+  const payload = await api.getUserRadiostation(userId);
+  dispatch({ type: 'GET_USER_RADIOSTATION', payload });
+};

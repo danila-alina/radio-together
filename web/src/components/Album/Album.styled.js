@@ -5,7 +5,16 @@ export const AlbumContiner = styled.div`
   display: flex;
   align-items: center;
   
-  margin-top: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  
+  :hover {
+    background-color: ${styles.backgroundLightSelectedColor};
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
   :first-child {
     margin-top: 0;
   }

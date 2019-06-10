@@ -76,7 +76,7 @@ class Track extends React.Component {
   }
 
   render() {
-    const { track } = this.props;
+    const { track, currentTrackId } = this.props;
     const {
       showPlaylistMenu,
       hoveredStar,
@@ -84,7 +84,7 @@ class Track extends React.Component {
     } = this.state;
 
     return (
-      <SC.TrackContiner background={showPlaylistMenu}>
+      <SC.TrackContiner background={showPlaylistMenu || currentTrackId === track._id}>
         <SC.CoverContainer>
           <SC.Cover src={track.cover.url} />
           {this.getPlayingButton(track._id)}

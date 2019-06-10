@@ -11,7 +11,7 @@ class RadiostationCard extends React.Component {
       colors, userName, radiostationName, userId,
     } = this.props;
     return (
-      <SC.CardContainer to="/my-account">
+      <SC.CardContainer to={`/profile/${userId}`}>
         <SC.Card
           topColor={colors.top}
           bottomColor={colors.bottom}

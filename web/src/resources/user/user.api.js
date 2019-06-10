@@ -41,3 +41,8 @@ export function getRadiostation() {
   return baseApi
     .get('user/radiostation');
 }
+
+export function getUserRadiostation(userId) {
+  return baseApi
+    .get(`user/${userId}/radiostation`);
+}

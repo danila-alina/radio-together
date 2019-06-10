@@ -73,9 +73,9 @@ class HomePage extends React.Component {
           <TracksList tracks={popularTracks.slice(0, 8)} />
         </SC.TracksSection>
         <SC.AlbumsSection>
-          <SC.SectionTitle>
-            Last Released Albums
-          </SC.SectionTitle>
+          <SC.AlbumsSectionTitle>
+            Popular Albums
+          </SC.AlbumsSectionTitle>
           <SC.AlbumsList>
             <SC.ListPortion>
               <Album

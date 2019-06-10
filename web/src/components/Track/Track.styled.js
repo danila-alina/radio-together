@@ -85,6 +85,7 @@ export const TrackContiner = styled.div`
   display: flex;
   align-items: center;
   background-color: ${props => props.background && styles.backgroundLightSelectedColor};
+  border-radius: 5px;
   
   padding-top: 10px;
   padding-bottom: 10px;

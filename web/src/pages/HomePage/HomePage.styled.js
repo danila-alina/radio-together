@@ -16,6 +16,11 @@ export const TracksSectionTitle = styled.div`
   padding-left: 10px;
 `;
 
+export const AlbumsSectionTitle = styled.div`
+  font-size: 18px;
+  padding-left: 10px;
+`;
+
 export const SectionTitle = styled.div`
   font-size: 18px;
 `;
@@ -26,7 +31,7 @@ export const AlbumsSection = styled.div`
 
 export const RadiostationsContainer = styled.div`
   display: flex;
-  margin: 30px 0;
+  margin-top: 30px;
 `;
 
 export const ListPortion = styled.div`

@@ -100,3 +100,28 @@ module.exports.getRadiostation = async (ctx) => {
     };
   }
 };
+
+module.exports.getUserRadiostation = async (ctx) => {
+  const { userId } = ctx.params;
+  const user = await userService.getUserById(userId);
+  const { radiostation } = user;
+
+  if (!radiostation.playlistId) {
+    ctx.body = {
+      radiostation,
+    };
+  } else {
+    const playlist = await playlistService.getPlaylistById(radiostation.playlistId);
+    const tracks = await trackService.getTracksByIds(playlist.tracks);
+
+    ctx.body = {
+      radiostation: {
+        ...radiostation,
+        playlist: {
+          ...playlist,
+          tracks,
+        },
+      },
+    };
+  }
+};

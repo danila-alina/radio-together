@@ -34,6 +34,11 @@ export default (state = initialState, action) => {
         ...state,
         radiostation: action.payload.radiostation,
       };
+    case 'GET_USER_RADIOSTATION':
+      return {
+        ...state,
+        userRadiostation: action.payload.radiostation,
+      };
     default:
       return state;
   }

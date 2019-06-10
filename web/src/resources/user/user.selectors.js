@@ -9,3 +9,7 @@ export const getUserInfo = ({ user }) => {
 export const getRadiostation = ({ user }) => {
   return user.radiostation;
 };
+
+export const getUserRadiostation = ({ user }, userId) => {
+  return user.userRadiostation;
+};

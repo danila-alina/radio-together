@@ -7,6 +7,7 @@ import MyMusicPage from 'pages/MyMusicPage';
 import RecommendationsPage from 'pages/RecommendationsPage';
 import PlaylistPage from 'pages/PlaylistPage';
 import SearchResultsPage from 'pages/SearchResultsPage';
+import ProfilePage from 'pages/ProfilePage';
 
 class Routes extends React.Component {
   render() {
@@ -21,6 +22,7 @@ class Routes extends React.Component {
           path="/search-tracks/:searchValue"
           component={props => <SearchResultsPage key={props.match.url} {...props} />}
         />
+        <Route path="/profile/:userId" component={ProfilePage} />
       </Switch>
     );
   }
