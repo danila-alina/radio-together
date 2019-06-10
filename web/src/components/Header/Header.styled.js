@@ -32,7 +32,7 @@ export const SearchButton = styled(NavLink)`
   border-radius: 10px;
   color: ${styles.whiteColor};
   background: linear-gradient(
-    to bottom left,
+    to bottom,
     #f1b9d2, #a67bc1 
   );
   font-size: 14px;
