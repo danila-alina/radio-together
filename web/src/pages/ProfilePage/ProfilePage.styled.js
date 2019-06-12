@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as styles from 'constants/styles';
+import { PlusCircle } from 'styled-icons/feather';
 
 export const StyledPage = styled.div`
 `;
@@ -14,9 +15,7 @@ export const PlaylistInfoContainer = styled.div`
   display: flex;
 `;
 
-export const PlaylistInfo = styled.div`
-  margin-left: 20px;
-`;
+export const PlaylistInfo = styled.div``;
 
 export const Playlist = styled.div`
   font-size: 14px;
@@ -41,4 +40,32 @@ export const Title = styled.div`
 
 export const TracksList = styled.div`
   margin-top: 20px;
+`;
+
+export const JoinRadiostationButton = styled.div`
+  display: flex;
+  align-items: center;
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const JoinRadiostationText = styled.div`
+  font-size: 14px;
+  font-weight: 300;
+  margin-left: 5px;
+`;
+
+export const JoinRadiostationIcon = styled(PlusCircle)`
+  width: 23px;
+  fill: transparent;
+  color: ${styles.iconColor};
+`;
+
+export const PlaylistInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
 `;

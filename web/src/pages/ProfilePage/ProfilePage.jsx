@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 
 import * as userActions from 'resources/user/user.actions';
 import * as userSelectors from 'resources/user/user.selectors';
+import * as currentTrackActions from 'resources/currentTrack/currentTrack.actions';
 
+import Loader from 'components/Loader';
 import AccountInfo from './components/AccountInfo';
 import Track from './components/Track';
 import PlaylistCover from './components/PlaylistCover';
@@ -12,13 +14,36 @@ import PlaylistCover from './components/PlaylistCover';
 import * as SC from './ProfilePage.styled';
 
 class ProfilePage extends React.Component {
+  state = {
+    isLoading: true,
+  };
+
   componentDidMount() {
     const { getUserRadiostation } = this.props;
     const { userId } = this.props.match.params;
-    getUserRadiostation(userId);
+    getUserRadiostation(userId)
+      .then(() => {
+        this.setState({
+          isLoading: false,
+        });
+      });
+  }
+
+  onJoinRadiostation = () => {
+    const { joinRadiostation, radiostation } = this.props;
+    const { playlist } = radiostation;
+    const { tracks } = playlist;
+    const track = tracks[2];
+    const trackProgress = 53;
+    joinRadiostation(track, trackProgress);
   }
 
   render() {
+    const { isLoading } = this.state;
+    if (isLoading) {
+      return <Loader />;
+    }
+
     const { radiostation } = this.props;
     const playlist = radiostation.playlist || {};
     const tracks = playlist.tracks || [];
@@ -37,10 +62,16 @@ class ProfilePage extends React.Component {
                     playlistId={radiostation.playlistId}
                     cover={playlist.cover}
                   />
-                  <SC.PlaylistInfo>
-                    <SC.Playlist>Playlist</SC.Playlist>
-                    <SC.PlaylistName>{playlist.name}</SC.PlaylistName>
-                  </SC.PlaylistInfo>
+                  <SC.PlaylistInfoWrapper>
+                    <SC.PlaylistInfo>
+                      <SC.Playlist>Playlist</SC.Playlist>
+                      <SC.PlaylistName>{playlist.name}</SC.PlaylistName>
+                    </SC.PlaylistInfo>
+                    <SC.JoinRadiostationButton onClick={this.onJoinRadiostation}>
+                      <SC.JoinRadiostationIcon />
+                      <SC.JoinRadiostationText>Join Radiostation</SC.JoinRadiostationText>
+                    </SC.JoinRadiostationButton>
+                  </SC.PlaylistInfoWrapper>
                 </SC.PlaylistInfoContainer>
 
                 <SC.TracksList>
@@ -75,11 +106,13 @@ ProfilePage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.object.isRequired,
   }).isRequired,
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.string,
+  joinRadiostation: PropTypes.func.isRequired,
 };
 
 ProfilePage.defaultProps = {
   radiostation: {},
+  userId: '',
 };
 
 const mapStateToProps = (state, props) => {
@@ -91,6 +124,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = {
   getUserRadiostation: userActions.getUserRadiostation,
+  joinRadiostation: currentTrackActions.joinRadiostation,
 };
 
 export default connect(

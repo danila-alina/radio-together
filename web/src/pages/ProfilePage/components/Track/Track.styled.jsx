@@ -9,21 +9,13 @@ export const TrackContainer = styled.div`
   align-items: center;
   
   background-color: ${props => props.selected && styles.backgroundSelectedColor};
-  
-  :hover {
-    background-color: ${(props) => {
-    return props.selected
-      ? styles.backgroundSelectedColor
-      : styles.backgroundLightSelectedColor;
-  }};
-    cursor: pointer;
-  }
 `;
 
 export const Cover = styled.img`
   width: 60px;
   height: 60px;
   border-radius: 5px;
+  border: 1px solid ${styles.backgroundGrayColor};
 `;
 
 export const TrackInfo = styled.div`

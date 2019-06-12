@@ -33,3 +33,16 @@ export const changeProgress = result => (dispatch) => {
 export const setCofiguredInstance = () => (dispatch) => {
   dispatch({ type: 'SET_CONFIGURED_INSTANCE' });
 };
+
+export const joinRadiostation = (track, trackProgress) => async (dispatch) => {
+  const music = window.MusicKit.getInstance();
+  await music.setQueue({ song: track.appleMusicId });
+  await music.play();
+  await music.seekToTime(trackProgress);
+
+  const payload = {
+    track,
+    progress: trackProgress,
+  };
+  dispatch({ type: 'JOIN_RADIOSTATION', payload });
+};

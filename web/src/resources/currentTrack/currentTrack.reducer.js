@@ -31,6 +31,13 @@ export default (state = initialState, action) => {
         ...state,
         isConfiguredInstance: true,
       };
+    case 'JOIN_RADIOSTATION':
+      return {
+        ...state,
+        track: action.payload.track,
+        progress: action.payload.progress,
+        status: 'playing',
+      };
     default:
       return state;
   }

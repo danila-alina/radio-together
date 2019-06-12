@@ -8,10 +8,10 @@ import {
 class Track extends React.Component {
   render() {
     const {
-      track, artist, cover, selected, onSelectTrack,
+      track, artist, cover,
     } = this.props;
     return (
-      <TrackContainer selected={selected} onClick={() => onSelectTrack()}>
+      <TrackContainer>
         <Cover src={cover} />
         <TrackInfo>
           <TrackName>{track}</TrackName>
@@ -26,13 +26,10 @@ Track.propTypes = {
   track: PropTypes.string.isRequired,
   artist: PropTypes.string.isRequired,
   cover: PropTypes.string,
-  selected: PropTypes.bool,
-  onSelectTrack: PropTypes.func.isRequired,
 };
 
 Track.defaultProps = {
   cover: '',
-  selected: false,
 };
 
 export default Track;
