@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import * as styles from 'constants/styles';
-import { PlusCircle } from 'styled-icons/feather';
+import { PlusCircle, MinusCircle } from 'styled-icons/feather';
 
 export const StyledPage = styled.div`
 `;
@@ -64,6 +64,34 @@ export const JoinRadiostationIcon = styled(PlusCircle)`
 `;
 
 export const PlaylistInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+`;
+
+export const LeaveRadiostationButton = styled.div`
+  display: flex;
+  align-items: center;
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const LeaveRadiostationText = styled.div`
+  font-size: 14px;
+  font-weight: 300;
+  margin-left: 5px;
+`;
+
+export const LeaveRadiostationIcon = styled(MinusCircle)`
+  width: 23px;
+  fill: transparent;
+  color: ${styles.iconColor};
+`;
+
+export const LeavelistInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

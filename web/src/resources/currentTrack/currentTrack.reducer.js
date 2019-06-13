@@ -38,6 +38,13 @@ export default (state = initialState, action) => {
         progress: action.payload.progress,
         status: 'playing',
       };
+    case 'LEAVE_RADIOSTATION':
+      return {
+        ...state,
+        track: {},
+        progress: 0,
+        status: 'stopped',
+      };
     default:
       return state;
   }

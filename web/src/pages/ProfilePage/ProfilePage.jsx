@@ -16,6 +16,7 @@ import * as SC from './ProfilePage.styled';
 class ProfilePage extends React.Component {
   state = {
     isLoading: true,
+    joinedRadiostation: false,
   };
 
   componentDidMount() {
@@ -33,13 +34,24 @@ class ProfilePage extends React.Component {
     const { joinRadiostation, radiostation } = this.props;
     const { playlist } = radiostation;
     const { tracks } = playlist;
-    const track = tracks[2];
+    const track = tracks[1];
     const trackProgress = 53;
     joinRadiostation(track, trackProgress);
+    this.setState({
+      joinedRadiostation: true,
+    });
+  }
+
+  onLeaveRadiostation = () => {
+    const { leaveRadiostation } = this.props;
+    leaveRadiostation();
+    this.setState({
+      joinedRadiostation: false,
+    });
   }
 
   render() {
-    const { isLoading } = this.state;
+    const { isLoading, joinedRadiostation } = this.state;
     if (isLoading) {
       return <Loader />;
     }
@@ -67,10 +79,20 @@ class ProfilePage extends React.Component {
                       <SC.Playlist>Playlist</SC.Playlist>
                       <SC.PlaylistName>{playlist.name}</SC.PlaylistName>
                     </SC.PlaylistInfo>
-                    <SC.JoinRadiostationButton onClick={this.onJoinRadiostation}>
-                      <SC.JoinRadiostationIcon />
-                      <SC.JoinRadiostationText>Join Radiostation</SC.JoinRadiostationText>
-                    </SC.JoinRadiostationButton>
+                    {!joinedRadiostation
+                      ? (
+                        <SC.JoinRadiostationButton onClick={this.onJoinRadiostation}>
+                          <SC.JoinRadiostationIcon />
+                          <SC.JoinRadiostationText>Join Radiostation</SC.JoinRadiostationText>
+                        </SC.JoinRadiostationButton>
+                      )
+                      : (
+                        <SC.LeaveRadiostationButton onClick={this.onLeaveRadiostation}>
+                          <SC.LeaveRadiostationIcon />
+                          <SC.LeaveRadiostationText>Leave Radiostation</SC.LeaveRadiostationText>
+                        </SC.LeaveRadiostationButton>
+                      )
+                    }
                   </SC.PlaylistInfoWrapper>
                 </SC.PlaylistInfoContainer>
 
@@ -108,6 +130,7 @@ ProfilePage.propTypes = {
   }).isRequired,
   userId: PropTypes.string,
   joinRadiostation: PropTypes.func.isRequired,
+  leaveRadiostation: PropTypes.func.isRequired,
 };
 
 ProfilePage.defaultProps = {
@@ -125,6 +148,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = {
   getUserRadiostation: userActions.getUserRadiostation,
   joinRadiostation: currentTrackActions.joinRadiostation,
+  leaveRadiostation: currentTrackActions.leaveRadiostation,
 };
 
 export default connect(

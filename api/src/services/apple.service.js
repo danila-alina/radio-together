@@ -20,7 +20,7 @@ appleService.getTrack = () => {
 };
 
 appleService.searchTracks = (searchValue) => {
-  return fetch(`${config.appleUrl}/catalog/by/search?term=${searchValue}&limit=10&types=songs,artists`, {
+  return fetch(`${config.appleUrl}/catalog/by/search?term=${searchValue}&limit=15&types=songs,artists`, {
     headers: defaultHeaders,
   }).then(res => res.json());
 };

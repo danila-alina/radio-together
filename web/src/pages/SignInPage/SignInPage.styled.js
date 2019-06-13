@@ -56,6 +56,7 @@ export const RegisterSection = styled.section`
 export const RegisterInput = styled.input.attrs(props => ({
   placeholder: props.placeholder,
   type: props.type ? props.type : 'text',
+  autocomplete: 'nope',
 }))`
   width: 100%;
   height: 40px;
@@ -69,6 +70,7 @@ export const RegisterInput = styled.input.attrs(props => ({
 export const LogInInput = styled.input.attrs(props => ({
   placeholder: props.placeholder,
   type: props.type ? props.type : 'text',
+  autocomplete: 'nope',
 }))`
   width: 100%;
   height: 40px;

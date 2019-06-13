@@ -36,13 +36,24 @@ export const setCofiguredInstance = () => (dispatch) => {
 
 export const joinRadiostation = (track, trackProgress) => async (dispatch) => {
   const music = window.MusicKit.getInstance();
-  await music.setQueue({ song: track.appleMusicId });
-  await music.play();
-  await music.seekToTime(trackProgress);
+  music.setQueue({ song: track.appleMusicId })
+    .then(() => {
+      music.play()
+        .then(() => {
+          music.seekToTime(43);
+        });
+    });
 
   const payload = {
     track,
-    progress: trackProgress,
+    progress: 43,
   };
   dispatch({ type: 'JOIN_RADIOSTATION', payload });
+};
+
+export const leaveRadiostation = () => async (dispatch) => {
+  const music = window.MusicKit.getInstance();
+  music.stop();
+
+  dispatch({ type: 'LEAVE_RADIOSTATION' });
 };
